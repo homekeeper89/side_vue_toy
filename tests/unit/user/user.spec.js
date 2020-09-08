@@ -10,7 +10,6 @@ describe("User Register 와 관련된 테스트", ()=>{
 
   it('버튼이 클릭 되는지 확인', async ()=>{
     const wrapper = shallowMount(UserRegister)
-
     expect(wrapper.vm.register()).toEqual({username:""})
   })
 
