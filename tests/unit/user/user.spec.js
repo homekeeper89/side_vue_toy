@@ -2,9 +2,12 @@ import {shallowMount} from "@vue/test-utils"
 import UserRegister from "@/components/user/UserRegister.vue"
 
 describe("User Register 와 관련된 테스트", ()=>{
+
+  const email = "test@email"
+  const password = "testPassword"
+  const nickName = "testNickname"
   it("Component가 제대로 렌더 되는가", ()=>{
     const wrapper = shallowMount(UserRegister)
-
     expect(wrapper.exists()).toBe(true)
   })
 
@@ -15,10 +18,6 @@ describe("User Register 와 관련된 테스트", ()=>{
 
   it("이메일, 비밀번호, 닉네임이 제대로 담기는가", ()=>{
     const wrapper = shallowMount(UserRegister)
-
-    const email = "test@email"
-    const password = "testPassword"
-    const nickName = "testNickname"
 
     wrapper.find(".email").setValue(email)
     wrapper.find(".password").setValue(password)
