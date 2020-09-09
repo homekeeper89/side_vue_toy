@@ -1,10 +1,16 @@
 <template>
   <div class="UserRegister">
     <div>
-      <input class="username" type="text" v-model="data.username">
+      <input class="email" type="text" v-model="data.username">
     </div>
     <div>
-      <button class="register" type="submit" @click="register">등록</button>
+      <input class="password" type="text" v-model="data.password">
+    </div>
+    <div>
+      <input class="nickName" type="text" v-model="data.nickName">
+    </div>
+    <div>
+      <button class="userRegister" type="submit" @click="register">등록</button>
     </div>
   </div>
 </template>
@@ -14,7 +20,9 @@ export default {
   data(){
     return{
       data:{
-        username:''
+        username:'',
+        password:'',
+        nickName:''
       }
     }
   },
