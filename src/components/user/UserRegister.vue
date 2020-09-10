@@ -15,6 +15,7 @@
   </div>
 </template>
 <script>
+import { mapActions } from 'vuex';
 export default {
   name:"UserRegister",
   data(){
@@ -27,8 +28,10 @@ export default {
     }
   },
   methods:{
+    ...mapActions({registerUser:'registerUser'}),
     register(){
-      return this.data
+      console.log("kkk")
+      this.registerUser(this.data)
     }
   }
 }
