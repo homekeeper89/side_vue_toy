@@ -53,8 +53,8 @@ describe("User Register 와 관련된 테스트", ()=>{
     expect(wp.html()).toMatchSnapshot() // UI가 나중에 변경될까바 참고 : https://jestjs.io/docs/en/snapshot-testing
   })
 
-  it("After Register Successfully", async ()=>{
-    let actions = {[registerUser]:jest.fn().mockResolvedValue()}
+  it.skip("After Register Successfully", async ()=>{
+    let actions = {[REGISTER_USER]:jest.fn().mockResolvedValue()}
     const store = createStore({actions})
     const wp = createWrapper({store})
 
@@ -65,12 +65,45 @@ describe("User Register 와 관련된 테스트", ()=>{
     }})
 
     const registerBtn = wp.find(".userRegister")
-    registerBtn.trigger("submit")
+    registerBtn.trigger("click")
 
     await flushPromises()
 
-    expect(actions[registerUser]).toHaveBeenCalled()
+    expect(actions[REGISTER_USER]).toHaveBeenCalled()
   })
+
+  it("나만의 전체 테스트", async ()=>{
+    const mockStore = { dispatch: jest.fn() };
+
+    const wrapper = shallowMount(UserRegister, {
+      mocks: {
+        $store: mockStore,
+      },
+    });
+    wrapper.find(".userRegister").trigger("click")
+    await wrapper.vm.$nextTick();
+    // await flushPromises()
+
+    expect(mockStore.dispatch).toHaveBeenCalledWith('testAction', {
+      msg: 'Test Dispatch',
+    });
+  })
+
+  it('mock 버튼 클릭', async () => {
+    const mockStore = { dispatch: jest.fn() };
+    const wrapper = shallowMount(UserRegister, {
+      mocks: {
+        $store: mockStore,
+      },
+    });
+
+    wrapper.find('.dispatch').trigger('click');
+    await wrapper.vm.$nextTick();
+
+    expect(mockStore.dispatch).toHaveBeenCalledWith('testHandle', {
+      msg: 'Test Dispatch',
+    });
+  });
 
   it("Component가 제대로 렌더 되는가", ()=>{
     const wrapper = shallowMount(UserRegister)

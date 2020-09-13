@@ -10,7 +10,8 @@
       <input class="nickName" type="text" v-model="data.nickName">
     </div>
     <div>
-      <button class="userRegister" type="submit" @click="register">등록</button>
+      <button class="userRegister" @click="register">등록</button>
+      <button class="dispatch" @click="handleDispatch">Dispatch</button>
     </div>
   </div>
 </template>
@@ -28,10 +29,14 @@ export default {
     }
   },
   methods:{
-    ...mapActions({registerUser:'registerUser'}),
+    // ...mapActions({registerUser:'REGISTER_USER'}),
+    handleDispatch() {
+      this.$store.dispatch('testHandle', { msg: 'Test Dispatch' });
+    },
     register(){
-      console.log("kkk")
-      this.registerUser(this.data)
+      this.$store.dispatch('testAction', { msg: 'Test Dispatch' });
+      // console.log("111")
+      // this.registerUser(this.data)
     }
   }
 }

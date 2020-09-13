@@ -18,7 +18,7 @@ describe("Actions 관련", ()=>{
     const password = "password"
     const nickName = 'nickName'
 
-    await actions.registerUser({email, password, nickName})
+    await actions.REGISTER_USER({email, password, nickName})
 
     expect(url).toBe("/api/v1/users")
     expect(body).toEqual({email, password, nickName})
