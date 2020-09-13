@@ -11,7 +11,6 @@
     </div>
     <div>
       <button class="userRegister" @click="register">등록</button>
-      <button class="dispatch" @click="handleDispatch">Dispatch</button>
     </div>
   </div>
 </template>
@@ -30,9 +29,6 @@ export default {
   },
   methods:{
     // ...mapActions({registerUser:'REGISTER_USER'}),
-    handleDispatch() {
-      this.$store.dispatch('testHandle', { msg: 'Test Dispatch' });
-    },
     register(){
       this.$store.dispatch('testAction', { msg: 'Test Dispatch' });
       // console.log("111")

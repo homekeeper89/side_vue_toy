@@ -89,21 +89,6 @@ describe("User Register 와 관련된 테스트", ()=>{
     });
   })
 
-  it('mock 버튼 클릭', async () => {
-    const mockStore = { dispatch: jest.fn() };
-    const wrapper = shallowMount(UserRegister, {
-      mocks: {
-        $store: mockStore,
-      },
-    });
-
-    wrapper.find('.dispatch').trigger('click');
-    await wrapper.vm.$nextTick();
-
-    expect(mockStore.dispatch).toHaveBeenCalledWith('testHandle', {
-      msg: 'Test Dispatch',
-    });
-  });
 
   it("Component가 제대로 렌더 되는가", ()=>{
     const wrapper = shallowMount(UserRegister)
