@@ -2,6 +2,7 @@ import {shallowMount, createLocalVue, mount} from "@vue/test-utils"
 import UserRegister from "@/components/user/UserRegister.vue"
 import flushPromises from 'flush-promises';
 import Vuex from "vuex"
+import registerUser from "@/store/actions.js"
 
 const localVue = createLocalVue()
 localVue.use(Vuex)
@@ -10,7 +11,7 @@ const createStore = (overrides) =>{
   const defaultStoreConfig = {
 
   }
-  return new Vuex.Store(defaultStoreConfig)
+  return new Vuex.Store(overrides)
   // return new Vuex.Store(
   //   merge(defaultStoreConfig, overrides)
   // ) TODO : merge 함수 구현
@@ -19,7 +20,7 @@ const createStore = (overrides) =>{
 const createWrapper = (overrides) =>{
   const defaultMountingOptions = {
     localVue,
-    store : createStore()
+    store : overrides
   }
   return mount(UserRegister, defaultMountingOptions)
 }
@@ -50,6 +51,25 @@ describe("User Register 와 관련된 테스트", ()=>{
 
   it("html should render correctly", ()=>{
     expect(wp.html()).toMatchSnapshot() // UI가 나중에 변경될까바 참고 : https://jestjs.io/docs/en/snapshot-testing
+  })
+
+  it("After Register Successfully", async ()=>{
+    let actions = {[registerUser]:jest.fn().mockResolvedValue()}
+    const store = createStore({actions})
+    const wp = createWrapper({store})
+
+    wp.setData({data:{
+      username:'test',
+      password:'test',
+      nickName:'test'
+    }})
+
+    const registerBtn = wp.find(".userRegister")
+    registerBtn.trigger("submit")
+
+    await flushPromises()
+
+    expect(actions[registerUser]).toHaveBeenCalled()
   })
 
   it("Component가 제대로 렌더 되는가", ()=>{
