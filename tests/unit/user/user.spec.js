@@ -2,7 +2,7 @@ import {shallowMount, createLocalVue, mount} from "@vue/test-utils"
 import UserRegister from "@/components/user/UserRegister.vue"
 import flushPromises from 'flush-promises';
 import Vuex from "vuex"
-import registerUser from "@/store/actions.js"
+import REGISTER_USER from "@/store/actions.js"
 
 const localVue = createLocalVue()
 localVue.use(Vuex)
@@ -54,9 +54,14 @@ describe("User Register 와 관련된 테스트", ()=>{
   })
 
   it.skip("After Register Successfully", async ()=>{
-    let actions = {[REGISTER_USER]:jest.fn().mockResolvedValue()}
-    const store = createStore({actions})
-    const wp = createWrapper({store})
+    let actions = {REGISTER_USER:jest.fn().mockResolvedValue()}
+    // const store = createStore({actions})
+    // const wp = createWrapper({store})
+    const store = new Vuex.Store(actions)
+    const wp = shallowMount(UserRegister, {
+      localVue,
+      store
+    })
 
     wp.setData({data:{
       username:'test',
@@ -64,7 +69,7 @@ describe("User Register 와 관련된 테스트", ()=>{
       nickName:'test'
     }})
 
-    const registerBtn = wp.find(".userRegister")
+    const registerBtn = wp.find(".userRegisterBtn")
     registerBtn.trigger("click")
 
     await flushPromises()

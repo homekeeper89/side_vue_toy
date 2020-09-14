@@ -12,6 +12,9 @@
     <div>
       <button class="userRegister" @click="register">등록</button>
     </div>
+    <div>
+      <button class="userRegisterBtn" @click="registerBtn">등록</button>
+    </div>
   </div>
 </template>
 <script>
@@ -33,6 +36,9 @@ export default {
       this.$store.dispatch('testAction', { msg: 'Test Dispatch' });
       // console.log("111")
       // this.registerUser(this.data)
+    },
+    registerBtn(){
+      this.$store.dispatch('REGISTER_USER', this.data);
     }
   }
 }
