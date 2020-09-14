@@ -32,3 +32,6 @@ yarn lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+### test CheatSheet
+https://medium.com/3yourmind/testing-vue-components-a-cheat-sheet-299b3b8be88d
