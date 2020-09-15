@@ -23,7 +23,7 @@ describe('Button 컴포넌트', () => {
   });
 
   it('getter가 제대로 되는가', () => {
-    const expectNum = 0;
+    const expectNum = 4;
     const state = {
       counter: expectNum,
     };

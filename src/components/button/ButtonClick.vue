@@ -9,12 +9,15 @@
   </div>
 </template>
 <script>
+import { GET_COUNTER, CUSTOMCOUNTER } from "@/store/button/types";
+import { mapGetters } from "vuex";
 export default {
   name: "ButtonClick",
   data() {
-    return {
-      counter: 0,
-    };
+    return {};
+  },
+  computed: {
+    ...mapGetters({ counter: `${CUSTOMCOUNTER}/${GET_COUNTER}` }),
   },
 };
 </script>

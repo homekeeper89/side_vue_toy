@@ -1,21 +1,21 @@
-import {SET_COUNTER, GET_COUNTER, COUNTER2_M} from "@/store/mutation-types"
+import { SET_COUNTER, GET_COUNTER, COUNTER2_M } from '@/store/mutation-types';
 
 export const counter = {
   namespaced: true,
   state: {
-    counter: 0
+    counter: 0,
   },
 
-  actions:{
-    [SET_COUNTER] : ({commit, dispatch}) => {
+  actions: {
+    [SET_COUNTER]: ({ commit, dispatch }) => {
       commit(SET_COUNTER);
-      dispatch(`${COUNTER2_M}${SET_COUNTER}`, null, {root:true})
-    }
+      dispatch(`${COUNTER2_M}${SET_COUNTER}`, null, { root: true });
+    },
   },
-  mutations:{
-    [SET_COUNTER] : state => state.counter++
+  mutations: {
+    [SET_COUNTER]: (state) => state.counter++,
   },
   getters: {
-    [GET_COUNTER]: state => state.counter
-  }
+    [GET_COUNTER]: (state) => state.counter,
+  },
 };
