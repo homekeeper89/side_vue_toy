@@ -12,6 +12,6 @@ export default new Vuex.Store({
   modules: {
     COUNTER,
     COUNTER2,
-    CUSTOM,
+    CUSTOM, // 이것 이름으로 결정됨, 실제 파일 이름이 matthew.js여도 CUSTOM으로 불리게 됨
   },
 });
