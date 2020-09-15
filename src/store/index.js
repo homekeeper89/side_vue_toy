@@ -4,7 +4,7 @@ import Vuex from 'vuex';
 // import * as counter from "./modules/counter";
 import { counter as COUNTER } from './modules/counter';
 import { counter2 as COUNTER2 } from './modules/counter2';
-import { customCounter as CUSTOM } from './button/matthew';
+import { customCounter as CUSTOM } from './button/counter';
 
 Vue.use(Vuex);
 
