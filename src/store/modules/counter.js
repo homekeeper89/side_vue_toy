@@ -1,10 +1,11 @@
 import {SET_COUNTER, GET_COUNTER, COUNTER2_M} from "@/store/mutation-types"
 
 export const counter = {
-  namespace:true,
-  state :{
-    counter:0
+  namespaced: true,
+  state: {
+    counter: 0
   },
+
   actions:{
     [SET_COUNTER] : ({commit, dispatch}) => {
       commit(SET_COUNTER);
@@ -14,7 +15,7 @@ export const counter = {
   mutations:{
     [SET_COUNTER] : state => state.counter++
   },
-  getters:{
-    [GET_COUNTER]:state => state.counter
+  getters: {
+    [GET_COUNTER]: state => state.counter
   }
-}
+};

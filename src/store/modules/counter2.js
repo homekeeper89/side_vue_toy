@@ -1,7 +1,7 @@
 import {SET_COUNTER, GET_COUNTER2} from "@/store/mutation-types"
 
 export const counter2 = {
-  namespace:true,
+  namespaced:true,
   state :{
     counter2:0
   },
@@ -12,6 +12,6 @@ export const counter2 = {
     [SET_COUNTER] : state => state.counter2++
   },
   getters:{
-    [GET_COUNTER2]:state => state.counter
+    [GET_COUNTER2]:state => state.counter2
   }
 }
