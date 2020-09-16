@@ -36,18 +36,14 @@ describe('Button 컴포넌트', () => {
     //   //   'CUSTOM/GET_COUNTER': mockCounter,
     //   // },
     // });
-    const store = new Vuex.Store({
-      modules: {
-        counter,
-      },
-    });
+    console.log(counter);
+    console.log(counter.state['counter']);
     const wp = shallowMount(Button, {
       store,
       localVue,
     });
     const counterDiv = wp.find('.counter');
-    expect(store.state.counter).toBe(7);
-    // expect(counterDiv.text()).toBe('7');
+    expect(counterDiv.text()).toBe('7');
   });
 
   it.skip('숫자가 나오는 곳이 있는가', () => {
