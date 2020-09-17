@@ -47,3 +47,7 @@ https://medium.com/3yourmind/testing-vue-components-a-cheat-sheet-299b3b8be88d
 ### vscode jest debug
 
 https://stackoverflow.com/questions/55419935/debugging-jest-test-visual-studio-code
+
+### vuex jest component
+
+https://vueschool.io/lessons/how-to-test-vuejs-component-with-vuex-store
