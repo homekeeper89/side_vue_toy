@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="button-counter">
-      <span class="counter">{{counter}}</span>
+      <span class="counter">{{ counterNum }}</span>
     </div>
     <div class="button-btn">
       <button class="btn">Click ME</button>
@@ -9,15 +9,17 @@
   </div>
 </template>
 <script>
-import { GET_COUNTER, MATTHEW } from "@/store/button/types";
-import { mapGetters } from "vuex";
+import { GET_COUNTER, MATTHEW } from '@/store/button/types';
+import { mapGetters } from 'vuex';
 export default {
-  name: "ButtonClick",
+  name: 'ButtonClick',
   data() {
-    return {};
+    return {
+      ...this.$store.state,
+    };
   },
   computed: {
-    ...mapGetters({ counter: `${MATTHEW}/${GET_COUNTER}` }),
+    ...mapGetters({ counterNum: `${MATTHEW}/${GET_COUNTER}` }),
   },
 };
 </script>
