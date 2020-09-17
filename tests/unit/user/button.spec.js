@@ -1,13 +1,20 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import Button from '@/components/button/ButtonClick.vue';
-import { customCounter as counter } from '@/store/button/counter';
+import { customCounter as counterStore } from '@/store/button/counter';
 import Vuex from 'vuex';
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
 
 describe('Button 컴포넌트', () => {
-  const store = new Vuex.Store(counter);
+  let store;
+  beforeEach(() => {
+    store = new Vuex.Store({
+      modules: {
+        CUSTOM: counterStore,
+      },
+    });
+  });
   it('렌더가 제대로 되는가, snapshot', () => {
     const wp = shallowMount(Button, {
       store,
@@ -27,38 +34,18 @@ describe('Button 컴포넌트', () => {
     expect(btn.text()).toBe(letter);
   });
 
-  it('숫자가 나오는 곳이 있는가', () => {
-    const mockCounter = jest.fn(() => 7);
-    // const store = new Vuex.Store({
-    //   getters: counter.getters,
-    //   // getters: {
-    //   //   // mock function
-    //   //   'CUSTOM/GET_COUNTER': mockCounter,
-    //   // },
-    // });
-    console.log(counter);
-    console.log(counter.state['counter']);
+  it('computed는 제대로 목킹 되는가', () => {
     const wp = shallowMount(Button, {
       store,
       localVue,
     });
+    expect(store.state.CUSTOM.counter).toEqual(7);
     const counterDiv = wp.find('.counter');
+    console.log(counterDiv.text());
     expect(counterDiv.text()).toBe('7');
   });
 
-  it.skip('숫자가 나오는 곳이 있는가', () => {
-    const wp = shallowMount(Button, {
-      mocks: {
-        $store: store,
-      },
-      localVue,
-    });
-    const counterDiv = wp.find('.counter');
-    expect(store.state.counter).toBe(7);
-    expect(counterDiv.text()).toBe('0');
-  });
-
-  it('getter가 제대로 되는가', () => {
+  it.skip('getter가 제대로 되는가', () => {
     const expectNum = 4;
     const state = {
       counter: expectNum,
