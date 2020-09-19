@@ -34,4 +34,10 @@ describe('Button 컴포넌트', () => {
     console.log(counterDiv.text());
     expect(counterDiv.text()).toBe('0');
   });
+
+  it('button을 클릭하면 counter는 증가되어야한다,', () => {
+    const btn = wp.find('.btn');
+    btn.trigger('click');
+    expect(store.state.CUSTOM.counter).toEqual(1);
+  });
 });
