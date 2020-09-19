@@ -1,12 +1,17 @@
-import Vue from "vue";
-import Vuex from "vuex";
-import actions from "./actions.js"
+import Vue from 'vue';
+import Vuex from 'vuex';
+// import { GET_COUNTER, SET_COUNTER } from "./mutation-types";
+// import * as counter from "./modules/counter";
+import { counter as COUNTER } from './modules/counter';
+import { counter2 as COUNTER2 } from './modules/counter2';
+import { customCounter as CUSTOM } from './button/counter';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: {},
-  mutations: {},
-  actions,
-  modules: {}
+  modules: {
+    COUNTER,
+    COUNTER2,
+    CUSTOM, // 이것 이름으로 결정됨, 실제 파일 이름이 matthew.js여도 CUSTOM으로 불리게 됨
+  },
 });
