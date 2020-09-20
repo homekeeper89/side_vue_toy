@@ -2,6 +2,6 @@
 
 exports[`ButtonClick Page 스냅샷을 찍자 1`] = `
 <div>
-  <div class="count-show"><span class="count-area">0, 0 </span></div>
+  <div class="count-show"><span class="count-area">0</span></div>
 </div>
 `;

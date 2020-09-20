@@ -13,4 +13,10 @@ describe('ButtonClick', () => {
     const count = wrapper.find('.count-area').text();
     expect(count).toBe('0');
   });
+
+  it('기본 영역을 확인하자 : 버튼 렌더 부분', () => {
+    const wrapper = shallowMount(ButtonPage);
+    const btn = wrapper.find('.increment-btn');
+    expect(btn.text()).toBe('Click Me');
+  });
 });
