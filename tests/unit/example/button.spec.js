@@ -19,4 +19,11 @@ describe('ButtonClick', () => {
     const btn = wrapper.find('.increment-btn');
     expect(btn.text()).toBe('Click Me');
   });
+
+  it('버튼의 함수가 제대로 호출 되는가', () => {
+    const wrapper = shallowMount(ButtonPage);
+    const btn = wrapper.find('.increment-btn');
+    btn.trigger('click');
+    expect(wrapper.vm.someMethod()).toBeCalled();
+  });
 });
