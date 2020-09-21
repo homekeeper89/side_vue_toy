@@ -4,7 +4,9 @@
       <span class="count-area">{{ counter }}</span>
     </div>
     <div>
-      <button class="increment-btn" @click="someMethod">Click Me</button>
+      <button class="increment-btn" @click="someMethod('name')">
+        Click Me
+      </button>
     </div>
   </div>
 </template>
@@ -18,6 +20,9 @@ export default {
   methods: {
     someMethod() {
       console.log('someMethod');
+    },
+    doSomething(number) {
+      return number % 2 == 0 ? true : false;
     },
   },
 };
