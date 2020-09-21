@@ -21,9 +21,10 @@ describe('ButtonClick', () => {
   });
 
   it('버튼의 함수가 제대로 호출 되는가', () => {
+    const mockMethod = jest.spyOn(ButtonPage.methods, 'someMethod');
     const wrapper = shallowMount(ButtonPage);
     const btn = wrapper.find('.increment-btn');
     btn.trigger('click');
-    expect(wrapper.vm.someMethod()).toBeCalled();
+    expect(mockMethod).toHaveBeenCalled();
   });
 });

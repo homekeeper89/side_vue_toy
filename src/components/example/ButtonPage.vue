@@ -4,7 +4,7 @@
       <span class="count-area">{{ counter }}</span>
     </div>
     <div>
-      <button class="increment-btn">Click Me</button>
+      <button class="increment-btn" @click="someMethod">Click Me</button>
     </div>
   </div>
 </template>
@@ -14,6 +14,11 @@ export default {
     return {
       counter: 0,
     };
+  },
+  methods: {
+    someMethod() {
+      console.log('someMethod');
+    },
   },
 };
 </script>
