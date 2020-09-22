@@ -34,8 +34,8 @@ describe('ButtonClick', () => {
     expect(mockSomeMethod).toHaveBeenCalled();
   });
 
-  it.skip('버튼의 함수가 인자와 함께 호출 되는가', () => {
-    const btn = wp.find('.increment-btn');
+  it('버튼의 함수가 인자와 함께 호출 되는가', () => {
+    const btn = wrapper.find('.increment-btn');
     btn.trigger('click');
     expect(mockSomeMethod).toBeCalledWith('name');
   });
