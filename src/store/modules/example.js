@@ -1,1 +1,5 @@
-export const store = {};
+export const exampleStore = {
+  state: {
+    counter: 0,
+  },
+};
