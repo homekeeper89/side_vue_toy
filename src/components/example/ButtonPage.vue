@@ -11,11 +11,13 @@
   </div>
 </template>
 <script>
+import { mapGetters } from 'vuex';
 export default {
   data() {
-    return {
-      counter: 0,
-    };
+    return {};
+  },
+  computed: {
+    ...mapGetters({ counter: 'GET_COUNTER' }),
   },
   methods: {
     someMethod() {

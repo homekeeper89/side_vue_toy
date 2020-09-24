@@ -1,13 +1,24 @@
 // tests/unit/example/button.spec.js
-import { shallowMount } from '@vue/test-utils';
+import { shallowMount, createLocalVue } from '@vue/test-utils';
 import ButtonPage from '@/components/example/ButtonPage';
+import Vuex from 'vuex';
+import { exampleStore } from '@/store/modules/example';
+
+const localVue = createLocalVue();
+localVue.use(Vuex);
 
 describe('ButtonClick', () => {
   let wrapper;
   let mockSomeMethod;
+  let store;
   beforeEach(() => {
+    store = new Vuex.Store({
+      modules: {
+        exampleStore,
+      },
+    });
     mockSomeMethod = jest.spyOn(ButtonPage.methods, 'someMethod');
-    wrapper = shallowMount(ButtonPage);
+    wrapper = shallowMount(ButtonPage, { store, localVue });
   });
   it('Page 스냅샷을 찍자', () => {
     expect(wrapper.html()).toMatchSnapshot();
