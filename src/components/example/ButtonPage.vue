@@ -11,7 +11,7 @@
   </div>
 </template>
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 export default {
   data() {
     return {};
@@ -20,7 +20,9 @@ export default {
     ...mapGetters({ counter: 'GET_COUNTER' }),
   },
   methods: {
+    ...mapActions({ increment: 'SET_COUNTER' }),
     someMethod() {
+      this.increment();
       console.log('someMethod');
     },
     doSomething(number) {

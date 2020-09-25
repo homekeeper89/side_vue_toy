@@ -50,4 +50,10 @@ describe('ButtonClick', () => {
     btn.trigger('click');
     expect(mockSomeMethod).toBeCalledWith('name');
   });
+
+  it('버튼을 클릭하면 counter가 +1 증가되어야한다', () => {
+    const btn = wrapper.find('.increment-btn');
+    btn.trigger('click');
+    expect(store.state.exampleStore.counter).toEqual(1);
+  });
 });
