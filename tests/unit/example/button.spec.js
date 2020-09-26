@@ -12,6 +12,7 @@ describe('ButtonClick', () => {
   let mockSomeMethod;
   let store;
   beforeEach(() => {
+    exampleStore.state.counter = 0;
     store = new Vuex.Store({
       modules: {
         exampleStore,
