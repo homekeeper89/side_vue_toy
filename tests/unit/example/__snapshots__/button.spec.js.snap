@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ButtonClick Page 스냅샷을 찍자 1`] = `
+<div>
+  <div class="count-show"><span class="count-area">0</span></div>
+  <div><button class="increment-btn">
+      Click Me
+    </button></div>
+</div>
+`;
