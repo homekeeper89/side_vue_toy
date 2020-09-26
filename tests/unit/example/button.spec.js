@@ -15,7 +15,7 @@ describe('ButtonClick', () => {
     exampleStore.state.counter = 0;
     store = new Vuex.Store({
       modules: {
-        exampleStore,
+        EXAMPLE: exampleStore,
       },
     });
     mockSomeMethod = jest.spyOn(ButtonPage.methods, 'someMethod');
@@ -55,6 +55,6 @@ describe('ButtonClick', () => {
   it('버튼을 클릭하면 counter가 +1 증가되어야한다', () => {
     const btn = wrapper.find('.increment-btn');
     btn.trigger('click');
-    expect(store.state.exampleStore.counter).toEqual(1);
+    expect(store.state.EXAMPLE.counter).toEqual(1);
   });
 });
