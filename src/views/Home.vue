@@ -1,9 +1,9 @@
 <template>
   <div>
     <div class="home">Hello World</div>
-    <div>Counter: {{counter}}</div>
-    <div>Counter2: {{counter2}}</div>
-    <div>custom: {{counter3}}</div>
+    <div>Counter: {{ counter }}</div>
+    <div>Counter2: {{ counter2 }}</div>
+    <div>custom: {{ counter3 }}</div>
     <button @click="increment">Press Me</button>
     <button @click="increment2">Press Me Counter 2</button>
   </div>
@@ -17,14 +17,10 @@ import {
   GET_COUNTER2,
   COUNTER2_M,
   COUNTER_M,
-} from "@/store/mutation-types";
-import {
-  GET_COUNTER as CUSTOM_GET_COUNTER,
-  MATTHEW,
-} from "@/store/button/types";
-import { mapGetters, mapActions } from "vuex";
+} from '@/store/mutation-types';
+import { mapGetters, mapActions } from 'vuex';
 export default {
-  name: "Home",
+  name: 'Home',
   methods: {
     ...mapActions({
       increment: `${COUNTER_M}${SET_COUNTER}`,
@@ -35,7 +31,6 @@ export default {
     ...mapGetters({
       counter: `${COUNTER_M}${GET_COUNTER}`,
       counter2: `${COUNTER2_M}${GET_COUNTER2}`,
-      counter3: `${MATTHEW}/${CUSTOM_GET_COUNTER}`,
     }),
   },
 };

@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
-import ButtonClick from '@/components/button/ButtonClick.vue';
+import ButtonClick from '@/components/example/ButtonPage.vue';
 
 Vue.use(VueRouter);
 
