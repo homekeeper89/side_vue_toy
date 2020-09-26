@@ -12,15 +12,20 @@
 </template>
 <script>
 import { mapGetters, mapActions } from 'vuex';
+import {
+  NAMESPACE,
+  SET_COUNTER,
+  GET_COUNTER,
+} from '@/store/modules/example-types';
 export default {
   data() {
     return {};
   },
   computed: {
-    ...mapGetters({ counter: 'GET_COUNTER' }),
+    ...mapGetters({ counter: `${NAMESPACE}/${GET_COUNTER}` }),
   },
   methods: {
-    ...mapActions({ increment: 'SET_COUNTER' }),
+    ...mapActions({ increment: `${NAMESPACE}/${SET_COUNTER}` }),
     someMethod() {
       this.increment();
       console.log('someMethod');

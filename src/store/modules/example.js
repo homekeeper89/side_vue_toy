@@ -1,6 +1,7 @@
 // store/modules/example
 import { GET_COUNTER, SET_COUNTER } from './example-types';
 export const exampleStore = {
+  namespaced: true,
   state: {
     counter: 0,
   },
