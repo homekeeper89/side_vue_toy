@@ -60,6 +60,6 @@ describe('User Register 와 관련된 테스트', () => {
       },
     });
     let res = wp.vm.validateData();
-    expect(res).toEqual(true);
+    expect(res).toEqual([]);
   });
 });
