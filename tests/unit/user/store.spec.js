@@ -1,5 +1,5 @@
 import { userStore as store } from '@/store/modules/users';
-import { REGISTER_USER } from '@/store/modules/types';
+import { REGISTER_USER, SET_USER_API_STATUS } from '@/store/modules/types';
 
 let url = '';
 let body = {};
@@ -25,5 +25,21 @@ describe('User와 관련된 모든 store', () => {
     await store.actions.REGISTER_USER({ commit, data });
     expect(url).toBe('/api/v1/user');
     expect(body).toEqual({ data });
+    let status = {
+      code: 200,
+      msg: 'success',
+    };
+    expect(commit).toHaveBeenCalledWith(SET_USER_API_STATUS, status);
+  });
+
+  it('apiStatus 변경 테스트', () => {
+    let state = store.state;
+    let status = {
+      code: 200,
+      msg: 'success',
+    };
+    store.mutations.SET_USER_API_STATUS(state, status);
+    expect(state.apiStatus.code).toEqual(status.code);
+    expect(state.apiStatus.msg).toEqual(status.msg);
   });
 });
