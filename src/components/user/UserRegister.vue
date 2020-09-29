@@ -37,8 +37,7 @@ export default {
       this.$store.dispatch('REGISTER_USER', this.data);
     },
     validateData() {
-      let items = this.data;
-      let res = Object.keys(items).filter((item) => !items[item]);
+      let res = Object.keys(this.data).filter((item) => !this.data[item]);
       return res.length != 0 ? false : true;
     },
   },
