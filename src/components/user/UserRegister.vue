@@ -38,8 +38,8 @@ export default {
     },
     validateData() {
       let items = this.data;
-      let res = Object.keys(items).filter((item) => !!items[item]);
-      return res;
+      let res = Object.keys(items).filter((item) => !items[item]);
+      return res.length != 0 ? false : true;
     },
   },
 };

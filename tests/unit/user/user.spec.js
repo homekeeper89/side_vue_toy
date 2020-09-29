@@ -50,16 +50,23 @@ describe('User Register 와 관련된 테스트', () => {
     expect(wp.vm.data.password).toBe(password);
     expect(wp.vm.data.nickName).toBe(nickName);
   });
-
-  it('등록시 fields는 모두 채워져 있어야한다', () => {
-    wp.setData({
-      data: {
-        username: '',
-        password: null,
-        nickName: '',
-      },
-    });
-    let res = wp.vm.validateData();
-    expect(res).toEqual([]);
-  });
+  const userCases = [
+    ['', '', '', false],
+    ['ke', null, '', false],
+    ['ke', 'ke', 'ke', true],
+  ];
+  it.each(userCases)(
+    '등록시 fields는 모두 채워져 있어야한다',
+    (username, password, nickname, expected) => {
+      wp.setData({
+        data: {
+          username: username,
+          password: password,
+          nickName: nickname,
+        },
+      });
+      let res = wp.vm.validateData();
+      expect(res).toEqual(expected);
+    }
+  );
 });
