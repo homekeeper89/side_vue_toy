@@ -32,7 +32,7 @@ describe('User와 관련된 모든 store', () => {
       nickName: 'nick',
     };
     mockResolve = status;
-    await store.actions.REGISTER_USER({ commit, data });
+    await store.actions.REGISTER_USER({ commit }, data);
     expect(url).toBe('/api/v1/user');
     expect(body).toEqual({ data });
     expect(commit).toHaveBeenCalledWith(SET_USER_API_STATUS, mockResolve);

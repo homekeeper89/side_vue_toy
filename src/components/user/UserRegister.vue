@@ -1,7 +1,7 @@
 <template>
   <div class="UserRegister">
     <div>
-      <input class="email" type="text" v-model="data.username" />
+      <input class="username" type="text" v-model="data.username" />
     </div>
     <div>
       <input class="password" type="text" v-model="data.password" />
@@ -31,7 +31,8 @@ export default {
   methods: {
     ...mapActions({ registerUser: `${USER_NAMESPACE}/${REGISTER_USER}` }),
     register() {
-      this.registerUser();
+      let payload = this.data;
+      this.registerUser(payload);
     },
     validateData() {
       let res = Object.keys(this.data).filter((item) => !this.data[item]);

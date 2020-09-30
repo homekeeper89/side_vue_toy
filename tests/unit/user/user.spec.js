@@ -8,24 +8,32 @@ const localVue = createLocalVue();
 localVue.use(Vuex);
 
 let url = '';
-let body = '';
-
+let body = {};
+let mockError = false;
+let mockResolve = true;
 jest.mock('axios', () => ({
   post: (_url, _body) => {
-    new Promise((resolve) => {
+    return new Promise((resolve, rejects) => {
+      if (mockError) {
+        throw Error;
+      }
       url = _url;
       body = _body;
-      resolve(true);
+      resolve(mockResolve);
     });
   },
 }));
 
 describe('User Register 와 관련된 테스트', () => {
-  const email = 'test@email';
+  const username = 'test@username';
   const password = 'testPassword';
   const nickName = 'testNickname';
   let wp;
   let store;
+  const status = {
+    status_code: 200,
+    msg: 'success',
+  };
   beforeEach(() => {
     store = new Vuex.Store({
       modules: {
@@ -45,7 +53,7 @@ describe('User Register 와 관련된 테스트', () => {
   });
 
   it('이메일, 비밀번호, 닉네임이 제대로 담기는가', () => {
-    wp.find('.email').setValue(email);
+    wp.find('.username').setValue(username);
     wp.find('.password').setValue(password);
     wp.find('.nickName').setValue(nickName);
 
@@ -53,7 +61,7 @@ describe('User Register 와 관련된 테스트', () => {
 
     wp.vm.$nextTick();
 
-    expect(wp.vm.data.username).toBe(email);
+    expect(wp.vm.data.username).toBe(username);
     expect(wp.vm.data.password).toBe(password);
     expect(wp.vm.data.nickName).toBe(nickName);
   });
@@ -77,15 +85,21 @@ describe('User Register 와 관련된 테스트', () => {
     }
   );
 
-  it('data를 담고 버튼을 클릭하면 data가 전송된다', async () => {
-    wp.find('.email').setValue(email);
+  it.only('data를 담고 버튼을 클릭하면 data가 전송된다', async () => {
+    mockResolve = status;
+    wp.find('.username').setValue(username);
     wp.find('.password').setValue(password);
     wp.find('.nickName').setValue(nickName);
 
     wp.find('.userRegister').trigger('click');
 
     await flushPromises();
-
+    let payload = {
+      username: username,
+      password: password,
+      nickName: nickName,
+    };
     expect(url).toBe('/api/v1/user');
+    expect(body.data).toEqual(payload);
   });
 });
