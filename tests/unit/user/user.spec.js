@@ -2,6 +2,7 @@ import { shallowMount, createLocalVue } from '@vue/test-utils';
 import UserRegister from '@/components/user/UserRegister.vue';
 import flushPromises from 'flush-promises';
 import Vuex from 'vuex';
+import { userStore } from '@/store/modules/users';
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
@@ -24,8 +25,14 @@ describe('User Register 와 관련된 테스트', () => {
   const password = 'testPassword';
   const nickName = 'testNickname';
   let wp;
+  let store;
   beforeEach(() => {
-    wp = shallowMount(UserRegister);
+    store = new Vuex.Store({
+      modules: {
+        USERS: userStore,
+      },
+    });
+    wp = shallowMount(UserRegister, { store, localVue });
   });
 
   it('html should render correctly', () => {
@@ -56,7 +63,7 @@ describe('User Register 와 관련된 테스트', () => {
     ['ke', 'ke', 'ke', true],
   ];
   it.each(userCases)(
-    '등록시 fields는 모두 채워져 있어야한다',
+    'data의 fields는 null이 없어야한다.',
     (username, password, nickname, expected) => {
       wp.setData({
         data: {
@@ -69,4 +76,16 @@ describe('User Register 와 관련된 테스트', () => {
       expect(res).toEqual(expected);
     }
   );
+
+  it('data를 담고 버튼을 클릭하면 data가 전송된다', () => {
+    wp.find('.email').setValue(email);
+    wp.find('.password').setValue(password);
+    wp.find('.nickName').setValue(nickName);
+
+    wp.find('.userRegister').trigger('click');
+
+    wp.vm.$nextTick();
+
+    expect(url).toBe('/api/v1/user');
+  });
 });

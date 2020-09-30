@@ -12,12 +12,11 @@
     <div>
       <button class="userRegister" @click="register">등록</button>
     </div>
-    <div>
-      <button class="userRegisterBtn" @click="registerBtn">등록</button>
-    </div>
   </div>
 </template>
 <script>
+import { mapActions } from 'Vuex';
+import { USER_NAMESPACE, REGISTER_USER } from '@/store/modules/types';
 export default {
   name: 'UserRegister',
   data() {
@@ -30,11 +29,9 @@ export default {
     };
   },
   methods: {
+    ...mapActions({ registerUser: `${USER_NAMESPACE}/${REGISTER_USER}` }),
     register() {
-      this.$store.dispatch('testAction', { msg: 'Test Dispatch' });
-    },
-    registerBtn() {
-      this.$store.dispatch('REGISTER_USER', this.data);
+      this.registerUser();
     },
     validateData() {
       let res = Object.keys(this.data).filter((item) => !this.data[item]);
