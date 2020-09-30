@@ -77,14 +77,14 @@ describe('User Register 와 관련된 테스트', () => {
     }
   );
 
-  it('data를 담고 버튼을 클릭하면 data가 전송된다', () => {
+  it('data를 담고 버튼을 클릭하면 data가 전송된다', async () => {
     wp.find('.email').setValue(email);
     wp.find('.password').setValue(password);
     wp.find('.nickName').setValue(nickName);
 
     wp.find('.userRegister').trigger('click');
 
-    wp.vm.$nextTick();
+    await flushPromises();
 
     expect(url).toBe('/api/v1/user');
   });
