@@ -15,12 +15,12 @@ export const userStore = {
   getters: {},
   actions: {
     [REGISTER_USER]: async ({ commit, data }) => {
-      await axios.post(api_register_user, { data });
-      let status = {
-        code: 200,
-        msg: 'success',
-      };
-      commit(SET_USER_API_STATUS, status);
+      try {
+        let res = await axios.post(api_register_user, { data });
+        commit(SET_USER_API_STATUS, res);
+      } catch (e) {
+        throw Error('API Error occurred');
+      }
     },
   },
   mutations: {
