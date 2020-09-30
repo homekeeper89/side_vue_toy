@@ -1,17 +1,8 @@
 import axios from 'axios';
 import { REGISTER_USER, SET_USER_API_STATUS } from './types';
-import CustomError from '@/utils/errors/customError';
+import { inspectResponse } from '@/utils/apiHelper';
 
 const api_register_user = '/api/v1/user';
-const inspectResponse = (response) => {
-  if (response.status_code != 200) {
-    throw new CustomError(
-      'Something went wrong',
-      response.status_code,
-      'some explain'
-    );
-  }
-};
 export const userStore = {
   namespaced: true,
   state: {
@@ -28,7 +19,6 @@ export const userStore = {
         inspectResponse(res);
         commit(SET_USER_API_STATUS, res);
       } catch (err) {
-        console.log(err.status);
         throw Error('API Error occurred');
       }
     },
