@@ -5,7 +5,7 @@ const inspectResponse = (response) => {
     throw new CustomError(
       'Something went wrong',
       response.status_code,
-      'some explain'
+      `code ${response.status_code}, error msg : ${response.msg}`
     );
   }
 };

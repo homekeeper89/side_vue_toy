@@ -1,5 +1,5 @@
 import { userStore as store } from '@/store/modules/users';
-import { REGISTER_USER, SET_USER_API_STATUS } from '@/store/modules/types';
+import { SET_USER_API_STATUS } from '@/store/modules/types';
 
 //https://stackoverflow.com/questions/58934628/how-can-i-mock-axios-api-calls-with-using-jest
 let url = '';

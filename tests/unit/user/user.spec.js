@@ -10,7 +10,10 @@ localVue.use(Vuex);
 let url = '';
 let body = {};
 let mockError = false;
-let mockResolve = true;
+let mockResolve = {
+  status_code: 200,
+  msg: 'success',
+};
 jest.mock('axios', () => ({
   post: (_url, _body) => {
     return new Promise((resolve, rejects) => {
@@ -30,10 +33,6 @@ describe('User Register 와 관련된 테스트', () => {
   const nickName = 'testNickname';
   let wp;
   let store;
-  const status = {
-    status_code: 200,
-    msg: 'success',
-  };
   beforeEach(() => {
     store = new Vuex.Store({
       modules: {
@@ -48,7 +47,6 @@ describe('User Register 와 관련된 테스트', () => {
   });
 
   it('Component가 제대로 렌더 되는가', () => {
-    const wp = shallowMount(UserRegister);
     expect(wp.exists()).toBe(true);
   });
 
@@ -85,8 +83,7 @@ describe('User Register 와 관련된 테스트', () => {
     }
   );
 
-  it.only('data를 담고 버튼을 클릭하면 data가 전송된다', async () => {
-    mockResolve = status;
+  it('data를 담고 버튼을 클릭하면 data가 전송된다', async () => {
     wp.find('.username').setValue(username);
     wp.find('.password').setValue(password);
     wp.find('.nickName').setValue(nickName);

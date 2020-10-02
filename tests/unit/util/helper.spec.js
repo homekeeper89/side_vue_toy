@@ -6,7 +6,7 @@ describe('Helper 테스트 모아두는 곳', () => {
     let response = { status_code: 400, msg: 'hello_world' };
     expect(() => {
       inspectResponse(response);
-    }).toThrow('some explain');
+    }).toThrow(`code ${response.status_code}, error msg : ${response.msg}`);
     expect(() => {
       inspectResponse(response);
     }).toThrow(CustomError);
