@@ -23,4 +23,30 @@ describe('App', () => {
     await wrapper.vm.$nextTick();
     expect(wrapper.findComponent(UserRegister).exists()).toBe(true);
   });
+
+  it('mock routing path', () => {
+    const $route = {
+      path: '/some/path',
+    };
+    const wrapper = shallowMount(UserRegister, {
+      mocks: {
+        $route,
+      },
+    });
+
+    expect(wrapper.vm.$route.path).toEqual('/some/path');
+  });
+
+  it.skip('renders id param', () => {
+    const wrapper = shallowMount(UserRegister, {
+      mocks: {
+        $route: {
+          params: {
+            msg: '유저 등록 화면',
+          },
+        },
+      },
+    });
+    expect(wrapper.text()).toContain('123');
+  });
 });
