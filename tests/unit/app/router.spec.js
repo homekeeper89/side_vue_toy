@@ -4,7 +4,6 @@ import VueRouter from 'vue-router';
 import UserRegister from '@/components/user/UserRegister.vue';
 import { userRoutes as routes } from '@/router/UserRoutes.js';
 import { routes as baseRoutes } from '@/router/index.js';
-import ButtonClick from '@/components/example/ButtonPage.vue';
 
 const localVue = createLocalVue();
 localVue.use(VueRouter);
@@ -26,20 +25,6 @@ describe('App', () => {
     expect(wrapper.findComponent(UserRegister).exists()).toBe(true);
   });
 
-  it.skip('mock routing path', () => {
-    // index의 routes 불러오면 작동이 안됨
-    const $route = {
-      path: '/some/path',
-    };
-    const wrapper = shallowMount(UserRegister, {
-      mocks: {
-        $route,
-      },
-    });
-
-    expect(wrapper.vm.$route.path).toEqual('/some/path');
-  });
-
   it('전체 routing이 제대로 되는가', async () => {
     const router = new VueRouter({
       mode: 'history',
@@ -54,6 +39,20 @@ describe('App', () => {
 
     await wrapper.vm.$nextTick();
     expect(wrapper.findComponent(UserRegister).exists()).toBe(true);
+  });
+
+  it.skip('mock routing path', () => {
+    // index의 routes 불러오면 작동이 안됨
+    const $route = {
+      path: '/some/path',
+    };
+    const wrapper = shallowMount(UserRegister, {
+      mocks: {
+        $route,
+      },
+    });
+
+    expect(wrapper.vm.$route.path).toEqual('/some/path');
   });
 
   it.skip('renders id param', () => {
