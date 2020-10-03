@@ -19,7 +19,7 @@ export const userStore = {
         inspectResponse(res);
         commit(SET_USER_API_STATUS, res);
       } catch (err) {
-        console.log(err);
+        console.error(err);
         throw Error('API Error occurred');
       }
     },

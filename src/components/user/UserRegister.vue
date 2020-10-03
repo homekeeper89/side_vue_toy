@@ -15,7 +15,7 @@
   </div>
 </template>
 <script>
-import { mapActions } from 'Vuex';
+import { mapActions } from 'vuex';
 import { USER_NAMESPACE, REGISTER_USER } from '@/store/modules/types';
 export default {
   name: 'UserRegister',
