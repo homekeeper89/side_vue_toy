@@ -2,10 +2,16 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
 import ButtonClick from '@/components/example/ButtonPage.vue';
-
+import { userRoutes } from './UserRoutes.js';
 Vue.use(VueRouter);
+// const router = new VueRouter({
+//   mode: 'history',
+//   base: process.env.BASE_URL,
+//   routes: userRoutes,
+// });
+// export default router;
 
-const routes = [
+const baseRoutes = [
   {
     path: '/',
     name: 'Home',
@@ -26,11 +32,10 @@ const routes = [
       import(/* webpackChunkName: "about" */ '../views/About.vue'),
   },
 ];
-
+export const routes = baseRoutes.concat(userRoutes);
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes,
 });
-
 export default router;

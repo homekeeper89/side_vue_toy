@@ -2,10 +2,9 @@
 
 exports[`User Register 와 관련된 테스트 html should render correctly 1`] = `
 <div class="UserRegister">
-  <div><input type="text" class="email"></div>
+  <div><input type="text" class="username"></div>
   <div><input type="text" class="password"></div>
   <div><input type="text" class="nickName"></div>
   <div><button class="userRegister">등록</button></div>
-  <div><button class="userRegisterBtn">등록</button></div>
 </div>
 `;

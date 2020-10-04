@@ -3,7 +3,6 @@
     <div class="home">Hello World</div>
     <div>Counter: {{ counter }}</div>
     <div>Counter2: {{ counter2 }}</div>
-    <div>custom: {{ counter3 }}</div>
     <button @click="increment">Press Me</button>
     <button @click="increment2">Press Me Counter 2</button>
   </div>

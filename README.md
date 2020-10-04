@@ -51,3 +51,15 @@ https://stackoverflow.com/questions/55419935/debugging-jest-test-visual-studio-c
 ### vuex jest component
 
 https://vueschool.io/lessons/how-to-test-vuejs-component-with-vuex-store
+
+### export, import 방법
+
+https://ko.javascript.info/import-export
+
+### testing live book
+
+https://livebook.manning.com/book/testing-vue-js-applications/chapter-10/58
+
+### 12 VueJS Best Practices for Pro Developers
+
+https://learnvue.co/2020/01/12-vuejs-best-practices-for-pro-developers/
