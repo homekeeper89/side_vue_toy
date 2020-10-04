@@ -1,9 +1,11 @@
 <template>
   <div class="UserRegister">
     <div>
+      <span>UserName</span>
       <input class="username" type="text" v-model="data.username" />
     </div>
     <div>
+      <span>password</span>
       <input class="password" type="text" v-model="data.password" />
     </div>
     <div>
