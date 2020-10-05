@@ -47,8 +47,8 @@ export const ApiService = {
   },
 };
 
-export const TagsService = {
+export const UserApiService = {
   get() {
-    return ApiService.get('tags');
+    return ApiService.get('user');
   },
 };

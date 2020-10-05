@@ -2,7 +2,7 @@ import { shallowMount, mount, createLocalVue } from '@vue/test-utils';
 import App from '@/App.vue';
 import VueRouter from 'vue-router';
 import UserRegister from '@/components/user/UserRegister.vue';
-import { userRoutes as routes } from '@/router/UserRoutes.js';
+import { UserRouteService as routes } from '@/router/user.route.js';
 import { routes as baseRoutes } from '@/router/index.js';
 
 const localVue = createLocalVue();
@@ -19,7 +19,7 @@ describe('App', () => {
       localVue,
       router,
     });
-    router.push('/registerUser').catch(() => {});
+    router.push('/user/register').catch(() => {});
 
     await wrapper.vm.$nextTick();
     expect(wrapper.findComponent(UserRegister).exists()).toBe(true);
@@ -35,7 +35,7 @@ describe('App', () => {
       localVue,
       router,
     });
-    router.push('/registerUser').catch(() => {}); // 에러 관련 https://stackoverflow.com/questions/62462276/how-to-solve-avoided-redundant-navigation-to-current-location-error-in-vue
+    router.push('/user/register').catch(() => {}); // 에러 관련 https://stackoverflow.com/questions/62462276/how-to-solve-avoided-redundant-navigation-to-current-location-error-in-vue
 
     await wrapper.vm.$nextTick();
     expect(wrapper.findComponent(UserRegister).exists()).toBe(true);

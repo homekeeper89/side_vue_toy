@@ -2,7 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
 import ButtonClick from '@/components/example/ButtonPage.vue';
-import { userRoutes } from './UserRoutes.js';
+import { UserRouteService } from './user.route.js';
 Vue.use(VueRouter);
 // const router = new VueRouter({
 //   mode: 'history',
@@ -32,7 +32,7 @@ const baseRoutes = [
       import(/* webpackChunkName: "about" */ '../views/About.vue'),
   },
 ];
-export const routes = baseRoutes.concat(userRoutes);
+export const routes = baseRoutes.concat(UserRouteService);
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
