@@ -2,7 +2,7 @@ import { shallowMount, createLocalVue } from '@vue/test-utils';
 import UserRegister from '@/components/user/UserRegister.vue';
 import flushPromises from 'flush-promises';
 import Vuex from 'vuex';
-import { userStore } from '@/store/modules/users';
+import { userStore as users } from '@/store/modules/users';
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
@@ -36,7 +36,7 @@ describe('User Register 와 관련된 테스트', () => {
   beforeEach(() => {
     store = new Vuex.Store({
       modules: {
-        USERS: userStore,
+        users,
       },
     });
     wp = shallowMount(UserRegister, { store, localVue });
