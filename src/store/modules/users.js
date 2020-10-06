@@ -2,7 +2,8 @@ import axios from 'axios';
 import { REGISTER_USER, SET_USER_API_STATUS } from './users-type.js';
 import { inspectResponse } from '@/utils/apiHelper';
 
-const api_register_user = '/api/v1/user';
+const api_register_user = '/api/users/v1';
+
 export const userStore = {
   namespaced: true,
   state: {

@@ -96,7 +96,7 @@ describe('User Register 와 관련된 테스트', () => {
       password: password,
       nickName: nickName,
     };
-    expect(url).toBe('/api/v1/user');
+    expect(url).toBe('/api/users/v1');
     expect(body.data).toEqual(payload);
   });
 });

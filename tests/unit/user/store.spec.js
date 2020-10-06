@@ -33,7 +33,7 @@ describe('User와 관련된 모든 store', () => {
     };
     mockResolve = status;
     await store.actions.REGISTER_USER({ commit }, data);
-    expect(url).toBe('/api/v1/user');
+    expect(url).toBe('/api/users/v1');
     expect(body).toEqual({ data });
     expect(commit).toHaveBeenCalledWith(SET_USER_API_STATUS, mockResolve);
   });
@@ -44,7 +44,7 @@ describe('User와 관련된 모든 store', () => {
     await expect(store.actions.REGISTER_USER(jest.fn(), {})).rejects.toThrow(
       'API Error occurred'
     );
-    expect(url).toBe('/api/v1/user');
+    expect(url).toBe('/api/users/v1');
   });
 
   it('apiStatus 변경 테스트', () => {

@@ -1,4 +1,4 @@
-import { ApiService } from '@/common/api.service';
+import { ApiService } from '@/common/api-service';
 
 describe('API 관련 테스트', () => {
   beforeEach(() => {
