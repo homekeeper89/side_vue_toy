@@ -24,6 +24,16 @@ export const userStore = {
         throw Error('API Error occurred');
       }
     },
+    testActions: async ({ commit }, data) => {
+      try {
+        let res = await axios.post(api_register_user, { data });
+        inspectResponse(res.data);
+        commit(SET_USER_API_STATUS, res.data);
+      } catch (err) {
+        console.error(err);
+        throw Error('API Error occurred');
+      }
+    },
   },
   mutations: {
     [SET_USER_API_STATUS]: (state, payload) => {
