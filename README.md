@@ -63,3 +63,7 @@ https://livebook.manning.com/book/testing-vue-js-applications/chapter-10/58
 ### 12 VueJS Best Practices for Pro Developers
 
 https://learnvue.co/2020/01/12-vuejs-best-practices-for-pro-developers/
+
+### Vuex 참고 자료
+
+https://withhamit.tistory.com/227
