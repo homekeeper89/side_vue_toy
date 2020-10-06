@@ -16,7 +16,7 @@ import {
   GET_COUNTER2,
   COUNTER2_M,
   COUNTER_M,
-} from '@/store/mutation-types';
+} from '@/store/modules/counter-types';
 import { mapGetters, mapActions } from 'vuex';
 export default {
   name: 'Home',

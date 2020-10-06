@@ -2,7 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
 import ButtonClick from '@/components/example/ButtonPage.vue';
-import { UserRouteService } from './user.route.js';
+import { UserRouteService } from './user-routes.js';
 Vue.use(VueRouter);
 // const router = new VueRouter({
 //   mode: 'history',

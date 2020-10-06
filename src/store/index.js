@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 import { counter as COUNTER } from './modules/counter';
 import { counter2 as COUNTER2 } from './modules/counter2';
 import { exampleStore as EXAMPLE } from './modules/example';
+import { users as USERS } from './modules/users';
 
 Vue.use(Vuex);
 
@@ -11,5 +12,6 @@ export default new Vuex.Store({
     COUNTER,
     COUNTER2,
     EXAMPLE, // namespaced : EXAMPLE
+    USERS,
   },
 });

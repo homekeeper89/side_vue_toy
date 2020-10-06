@@ -2,7 +2,7 @@ import { shallowMount, mount, createLocalVue } from '@vue/test-utils';
 import App from '@/App.vue';
 import VueRouter from 'vue-router';
 import UserRegister from '@/components/user/UserRegister.vue';
-import { UserRouteService as routes } from '@/router/user.route.js';
+import { UserRouteService as routes } from '@/router/user-routes.js';
 import { routes as baseRoutes } from '@/router/index.js';
 
 const localVue = createLocalVue();
