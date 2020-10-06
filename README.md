@@ -67,3 +67,7 @@ https://learnvue.co/2020/01/12-vuejs-best-practices-for-pro-developers/
 ### Vuex 참고 자료
 
 https://withhamit.tistory.com/227
+
+### 테스트 환경 구축하기 : faker / api
+
+https://gongzza.github.io/javascript/vuejs/webpack-simple-with-test-3/
