@@ -20,9 +20,11 @@ describe('User와 관련된 모든 store', () => {
       nickName: 'nick',
     };
     mockAxios.onPost('/api/users/v1').reply(200, status);
+    let url = mockAxios.handlers.post[0][0];
     await store.actions.testActions({ commit }, data);
-    // expect(url).toBe('/api/users/v1');
-    // expect(body).toEqual({ data });
+    let body = mockAxios.history.post[0].data; // jsonfiy 해야함
+    expect(url).toBe('/api/users/v1');
+    // expect(body).toEqual(data);
     expect(commit).toHaveBeenCalledWith(SET_USER_API_STATUS, status);
   });
 });

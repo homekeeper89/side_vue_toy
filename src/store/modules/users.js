@@ -4,6 +4,11 @@ import { inspectResponse } from '@/utils/apiHelper';
 
 const api_register_user = '/api/users/v1';
 
+const reqresApi = axios.create({
+  baseURL: 'https://reqres.in', // Url
+  timeout: 5000, // timeout 5초
+});
+
 export const userStore = {
   namespaced: true,
   state: {
