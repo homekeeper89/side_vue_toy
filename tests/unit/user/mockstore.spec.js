@@ -24,7 +24,7 @@ describe('User와 관련된 모든 store', () => {
     await store.actions.testActions({ commit }, data);
     let body = mockAxios.history.post[0].data; // jsonfiy 해야함
     expect(url).toBe('/api/users/v1');
-    // expect(body).toEqual(data);
+    expect(body).toEqual(JSON.stringify({ data: data }));
     expect(commit).toHaveBeenCalledWith(SET_USER_API_STATUS, status);
   });
 });
