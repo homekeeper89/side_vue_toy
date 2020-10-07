@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { REGISTER_USER, SET_USER_API_STATUS } from './users-type.js';
-import { inspectResponse } from '@/utils/apiHelper';
+import { inspectResponse } from '@/utils/api-helper';
 
 const api_register_user = '/api/users/v1';
 
