@@ -22,10 +22,10 @@ export const userStore = {
     [REGISTER_USER]: async ({ commit }, data) => {
       try {
         let res = await axios.post(api_register_user, {
-          data: data,
+          data,
         });
-        inspectResponse(res);
-        commit(SET_USER_API_STATUS, res);
+        inspectResponse(res.data);
+        commit(SET_USER_API_STATUS, res.data);
       } catch (err) {
         console.error(err);
         throw Error('API Error occurred');

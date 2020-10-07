@@ -1,39 +1,30 @@
+import Vuex from 'vuex';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import UserRegister from '@/components/user/UserRegister.vue';
 import flushPromises from 'flush-promises';
-import Vuex from 'vuex';
 import { userStore as users } from '@/store/modules/users';
+import { MockAxiosHelper } from '@/utils/test-helper';
+import axios from 'axios';
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
 
-let url = '';
-let body = {};
-let mockError = false;
-let mockResolve = {
-  status_code: 200,
-  msg: 'success',
-};
-jest.mock('axios', () => ({
-  post: (_url, _body) => {
-    return new Promise((resolve, rejects) => {
-      if (mockError) {
-        throw Error;
-      }
-      url = _url;
-      body = _body;
-      resolve(mockResolve);
-    });
-  },
-}));
-
 describe('User Register 와 관련된 테스트', () => {
+  const status = {
+    status_code: 200,
+    msg: 'success',
+  };
   const username = 'test@username';
   const password = 'testPassword';
   const nickName = 'testNickname';
   let wp;
   let store;
+  let mockAxios;
+  let mockAxiosHelper;
   beforeEach(() => {
+    mockAxiosHelper = new MockAxiosHelper(axios);
+    mockAxios = mockAxiosHelper.getAxios();
+
     store = new Vuex.Store({
       modules: {
         users,
@@ -51,6 +42,7 @@ describe('User Register 와 관련된 테스트', () => {
   });
 
   it('이메일, 비밀번호, 닉네임이 제대로 담기는가', () => {
+    mockAxios.onPost('/api/users/v1').reply(200, status);
     wp.find('.username').setValue(username);
     wp.find('.password').setValue(password);
     wp.find('.nickName').setValue(nickName);
@@ -84,19 +76,23 @@ describe('User Register 와 관련된 테스트', () => {
   );
 
   it('data를 담고 버튼을 클릭하면 data가 전송된다', async () => {
+    mockAxios.onPost('/api/users/v1').reply(200, status);
+
     wp.find('.username').setValue(username);
     wp.find('.password').setValue(password);
     wp.find('.nickName').setValue(nickName);
 
     wp.find('.userRegister').trigger('click');
 
-    await flushPromises();
-    let payload = {
+    let data = {
       username: username,
       password: password,
       nickName: nickName,
     };
+    await flushPromises();
+    let url = mockAxiosHelper.getUrl('post');
+    let body = mockAxiosHelper.getData('post'); // jsonfiy 해야함
     expect(url).toBe('/api/users/v1');
-    expect(body.data).toEqual(payload);
+    expect(body).toEqual(JSON.stringify({ data: data }));
   });
 });
