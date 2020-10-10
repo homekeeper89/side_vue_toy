@@ -23,7 +23,7 @@ describe('User와 관련된 모든 store', () => {
     };
 
     mockAxios.onPost('/api/users/v1').reply(200, status);
-    await store.actions.testActions({ commit }, data);
+    await store.actions.REGISTER_USER({ commit }, data);
 
     let url = mockAxiosHelper.getUrl('post');
     let body = mockAxiosHelper.getData('post'); // jsonfiy 해야함
