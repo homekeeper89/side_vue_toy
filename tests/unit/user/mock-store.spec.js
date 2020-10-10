@@ -1,6 +1,7 @@
 import { userStore as store } from '@/store/modules/users';
 import { SET_USER_API_STATUS } from '@/store/modules/users-type';
 import mockAxios from 'axios';
+import { getUrlFromSpy } from '../../test-helper.js';
 
 describe('User와 관련된 모든 store', () => {
   const status = {
@@ -21,7 +22,7 @@ describe('User와 관련된 모든 store', () => {
     };
     const spyPost = jest.spyOn(mockAxios, 'post');
     await store.actions.REGISTER_USER({ commit }, data);
-    let url = spyPost.mock.calls[0][0];
+    let url = getUrlFromSpy(spyPost);
     expect(spyPost).toBeCalledTimes(1);
     // expect(spyPost).toBeCalledWith(`/api/user/v1`);
     expect(url).toEqual('/api/users/v1');

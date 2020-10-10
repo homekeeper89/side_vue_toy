@@ -1,3 +1,4 @@
+// deprecated : axios-mock-adapter를 사용안함, 삭제될 예정
 import MockAdapter from 'axios-mock-adapter';
 //https://stackoverflow.com/questions/55038758/how-to-work-with-path-parameters-in-axios-mock-adapter
 export class MockAxiosHelper {
