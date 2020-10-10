@@ -1,16 +1,19 @@
 import { userStore as store } from '@/store/modules/users';
 import { SET_USER_API_STATUS } from '@/store/modules/users-type';
 import mockAxios from 'axios';
+import { getUrlFromSpy, getDataFromSpy } from '../../test-helper.js';
 
 describe('User와 관련된 모든 store', () => {
   const status = {
     status_code: 200,
     msg: 'success',
   };
+  let spyPost;
   beforeEach(() => {
     mockAxios.post.mockImplementationOnce(() =>
       Promise.resolve({ data: status })
     );
+    spyPost = jest.spyOn(mockAxios, 'post');
   });
   it('등록 api는 성공할 경우와 실패할 경우를 구분 지어야 한다', async () => {
     let commit = jest.fn();
@@ -22,16 +25,21 @@ describe('User와 관련된 모든 store', () => {
 
     await store.actions.REGISTER_USER({ commit }, data);
 
-    // expect(url).toBe('/api/users/v1');
-    // expect(body).toEqual(JSON.stringify({ data: data }));
+    let url = getUrlFromSpy(spyPost);
+    let body = getDataFromSpy(spyPost);
+
+    expect(spyPost).toBeCalledTimes(1);
+    expect(url).toEqual('/api/users/v1');
+    expect(body).toEqual({ data: data });
     expect(commit).toHaveBeenCalledWith(SET_USER_API_STATUS, status);
   });
 
-  it.skip('등록 api가 실패할 경우', async () => {
+  it('등록 api가 실패할 경우', async () => {
     await expect(store.actions.REGISTER_USER(jest.fn(), {})).rejects.toThrow(
       'API Error occurred'
     );
-    expect(mockAxiosHelper.getUrl('post')).toBe('/api/users/v1');
+    let url = getUrlFromSpy(spyPost);
+    expect(url).toBe('/api/users/v1');
   });
 
   it('apiStatus 변경 테스트', () => {

@@ -4,6 +4,7 @@ import UserRegister from '@/components/user/UserRegister.vue';
 import flushPromises from 'flush-promises';
 import { userStore as users } from '@/store/modules/users';
 import mockAxios from 'axios';
+import { getUrlFromSpy, getDataFromSpy } from '../../test-helper.js';
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
@@ -18,11 +19,12 @@ describe('User Register 와 관련된 테스트', () => {
   const nickName = 'testNickname';
   let wp;
   let store;
+  let spyPost;
   beforeEach(() => {
     mockAxios.post.mockImplementationOnce(() =>
       Promise.resolve({ data: status })
     );
-
+    spyPost = jest.spyOn(mockAxios, 'post');
     store = new Vuex.Store({
       modules: {
         users,
@@ -86,7 +88,10 @@ describe('User Register 와 관련된 테스트', () => {
     };
     await flushPromises();
 
-    // expect(url).toBe('/api/users/v1');
-    // expect(body).toEqual(JSON.stringify({ data: data }));
+    let url = getUrlFromSpy(spyPost);
+    let body = getDataFromSpy(spyPost);
+
+    expect(url).toBe('/api/users/v1');
+    expect(body).toEqual({ data: data });
   });
 });
