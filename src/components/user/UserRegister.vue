@@ -18,7 +18,7 @@
 </template>
 <script>
 import { mapActions } from 'vuex';
-import { USER_NAMESPACE, REGISTER_USER } from '@/store/modules/types';
+import { USER_NAMESPACE, REGISTER_USER } from '@/store/modules/users-type';
 export default {
   name: 'UserRegister',
   data() {

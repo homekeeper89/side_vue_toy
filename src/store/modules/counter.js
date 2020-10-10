@@ -1,4 +1,8 @@
-import { SET_COUNTER, GET_COUNTER, COUNTER2_M } from '@/store/mutation-types';
+import {
+  SET_COUNTER,
+  GET_COUNTER,
+  COUNTER2_M,
+} from '@/store/modules/counter-types';
 
 export const counter = {
   namespaced: true,

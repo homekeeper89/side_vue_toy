@@ -1,8 +1,14 @@
 import axios from 'axios';
-import { REGISTER_USER, SET_USER_API_STATUS } from './types';
-import { inspectResponse } from '@/utils/apiHelper';
+import { REGISTER_USER, SET_USER_API_STATUS } from './users-type.js';
+import { inspectResponse } from '@/utils/api-helper';
 
-const api_register_user = '/api/v1/user';
+const api_register_user = '/api/users/v1';
+
+const reqresApi = axios.create({
+  baseURL: 'https://reqres.in', // Url
+  timeout: 5000, // timeout 5초
+});
+
 export const userStore = {
   namespaced: true,
   state: {
@@ -15,9 +21,11 @@ export const userStore = {
   actions: {
     [REGISTER_USER]: async ({ commit }, data) => {
       try {
-        let res = await axios.post(api_register_user, { data });
-        inspectResponse(res);
-        commit(SET_USER_API_STATUS, res);
+        let res = await reqresApi.post(api_register_user, {
+          data,
+        });
+        inspectResponse(res.data);
+        commit(SET_USER_API_STATUS, res.data);
       } catch (err) {
         console.error(err);
         throw Error('API Error occurred');
