@@ -21,7 +21,7 @@ export const userStore = {
   actions: {
     [REGISTER_USER]: async ({ commit }, data) => {
       try {
-        let res = await axios.post(api_register_user, {
+        let res = await reqresApi.post(api_register_user, {
           data,
         });
         inspectResponse(res.data);
