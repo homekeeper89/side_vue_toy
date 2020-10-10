@@ -1,42 +1,33 @@
+import Vuex from 'vuex';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import UserRegister from '@/components/user/UserRegister.vue';
 import flushPromises from 'flush-promises';
-import Vuex from 'vuex';
-import { userStore } from '@/store/modules/users';
+import { userStore as users } from '@/store/modules/users';
+import mockAxios from 'axios';
+import { getUrlFromSpy, getDataFromSpy } from '../../test-helper.js';
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
 
-let url = '';
-let body = {};
-let mockError = false;
-let mockResolve = {
-  status_code: 200,
-  msg: 'success',
-};
-jest.mock('axios', () => ({
-  post: (_url, _body) => {
-    return new Promise((resolve, rejects) => {
-      if (mockError) {
-        throw Error;
-      }
-      url = _url;
-      body = _body;
-      resolve(mockResolve);
-    });
-  },
-}));
-
 describe('User Register 와 관련된 테스트', () => {
+  const status = {
+    status_code: 200,
+    msg: 'success',
+  };
   const username = 'test@username';
   const password = 'testPassword';
   const nickName = 'testNickname';
   let wp;
   let store;
+  let spyPost;
   beforeEach(() => {
+    mockAxios.post.mockImplementationOnce(() =>
+      Promise.resolve({ data: status })
+    );
+    spyPost = jest.spyOn(mockAxios, 'post');
     store = new Vuex.Store({
       modules: {
-        USERS: userStore,
+        users,
       },
     });
     wp = shallowMount(UserRegister, { store, localVue });
@@ -83,20 +74,24 @@ describe('User Register 와 관련된 테스트', () => {
     }
   );
 
-  it('data를 담고 버튼을 클릭하면 data가 전송된다', async () => {
+  it.skip('data를 담고 버튼을 클릭하면 data가 전송된다', async () => {
     wp.find('.username').setValue(username);
     wp.find('.password').setValue(password);
     wp.find('.nickName').setValue(nickName);
 
     wp.find('.userRegister').trigger('click');
 
-    await flushPromises();
-    let payload = {
+    let data = {
       username: username,
       password: password,
       nickName: nickName,
     };
-    expect(url).toBe('/api/v1/user');
-    expect(body.data).toEqual(payload);
+    await flushPromises();
+
+    let url = getUrlFromSpy(spyPost);
+    let body = getDataFromSpy(spyPost);
+
+    expect(url).toBe('/api/users/v1');
+    expect(body).toEqual({ data: data });
   });
 });
