@@ -9,7 +9,7 @@ const reqresApi = axios.create({
   timeout: 5000, // timeout 5초
 });
 
-export const userStore = {
+export const users = {
   namespaced: true,
   state: {
     apiStatus: {

@@ -2,7 +2,7 @@ import Vuex from 'vuex';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import UserRegister from '@/components/user/UserRegister.vue';
 import flushPromises from 'flush-promises';
-import { userStore as users } from '@/store/modules/users';
+import { users } from '@/store/modules/users';
 import mockAxios from 'axios';
 import { getUrlFromSpy, getDataFromSpy } from '../../test-helper.js';
 

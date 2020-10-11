@@ -1,4 +1,4 @@
-import { userStore as store } from '@/store/modules/users';
+import { users as store } from '@/store/modules/users';
 import { SET_USER_API_STATUS } from '@/store/modules/users-type';
 import mockAxios from 'axios';
 import { getUrlFromSpy, getDataFromSpy } from '../../test-helper.js';
