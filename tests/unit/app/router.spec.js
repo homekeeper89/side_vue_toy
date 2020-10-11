@@ -4,11 +4,17 @@ import VueRouter from 'vue-router';
 import UserRegister from '@/components/user/UserRegister.vue';
 import { UserRouteService as routes } from '@/router/user-routes.js';
 import { routes as baseRoutes } from '@/router/index.js';
+import Vuetify from 'vuetify';
 
 const localVue = createLocalVue();
 localVue.use(VueRouter);
 
 describe('App', () => {
+  let vuetify;
+
+  beforeEach(() => {
+    vuetify = new Vuetify();
+  });
   it('라우팅 모듈이 정상으로 되는가', async () => {
     const router = new VueRouter({
       mode: 'history',
@@ -17,6 +23,7 @@ describe('App', () => {
     });
     const wrapper = mount(App, {
       localVue,
+      vuetify,
       router,
     });
     router.push('/user/register').catch(() => {});
@@ -33,6 +40,7 @@ describe('App', () => {
     });
     const wrapper = mount(App, {
       localVue,
+      vuetify,
       router,
     });
     router.push('/user/register').catch(() => {}); // 에러 관련 https://stackoverflow.com/questions/62462276/how-to-solve-avoided-redundant-navigation-to-current-location-error-in-vue
