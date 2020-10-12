@@ -75,6 +75,19 @@ describe('User Register 와 관련된 테스트', () => {
     }
   );
 
+  it('비밀번호가 서로 다르면 메세지를 띄워줘야한다', () => {
+    let wrongPwd = '12345';
+    wp.find('.password').setValue(password);
+    wp.find('.password_re').setValue(wrongPwd);
+
+    wp.find('.userRegister').trigger('click');
+    wp.vm.$nextTick();
+
+    let res = wp.find('.error__password--input').text();
+
+    expect(res).toBe('패스워드가 맞지 않습니다.');
+  });
+
   it('data를 담고 버튼을 클릭하면 data가 전송된다', async () => {
     wp.find('.email').setValue(email);
     wp.find('.password').setValue(password);

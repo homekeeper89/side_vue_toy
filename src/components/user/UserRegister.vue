@@ -7,6 +7,8 @@
     <div>
       <span>password : </span>
       <input class="password" type="text" v-model="data.password" />
+      <span>password_again : </span>
+      <input class="password_re" type="text" v-model="password_re" />
     </div>
     <div>
       <input class="nickName" type="text" v-model="data.nickName" />
@@ -28,6 +30,7 @@ export default {
         password: '',
         nickName: '',
       },
+      password_re: '',
     };
   },
   methods: {
