@@ -1,11 +1,11 @@
 <template>
   <div class="UserRegister">
     <div>
-      <span>UserName</span>
-      <input class="username" type="text" v-model="data.username" />
+      <span>email : </span>
+      <input class="email" type="text" v-model="data.email" />
     </div>
     <div>
-      <span>password</span>
+      <span>password : </span>
       <input class="password" type="text" v-model="data.password" />
     </div>
     <div>
@@ -24,7 +24,7 @@ export default {
   data() {
     return {
       data: {
-        username: '',
+        email: '',
         password: '',
         nickName: '',
       },

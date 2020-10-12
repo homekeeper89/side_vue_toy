@@ -14,7 +14,7 @@ describe('User Register 와 관련된 테스트', () => {
     status_code: 200,
     msg: 'success',
   };
-  const username = 'test@username';
+  const email = 'test@username';
   const password = 'testPassword';
   const nickName = 'testNickname';
   let wp;
@@ -42,7 +42,7 @@ describe('User Register 와 관련된 테스트', () => {
   });
 
   it('이메일, 비밀번호, 닉네임이 제대로 담기는가', () => {
-    wp.find('.username').setValue(username);
+    wp.find('.email').setValue(email);
     wp.find('.password').setValue(password);
     wp.find('.nickName').setValue(nickName);
 
@@ -50,10 +50,11 @@ describe('User Register 와 관련된 테스트', () => {
 
     wp.vm.$nextTick();
 
-    expect(wp.vm.data.username).toBe(username);
+    expect(wp.vm.data.email).toBe(email);
     expect(wp.vm.data.password).toBe(password);
     expect(wp.vm.data.nickName).toBe(nickName);
   });
+
   const userCases = [
     ['', '', '', false],
     ['ke', null, '', false],
@@ -61,10 +62,10 @@ describe('User Register 와 관련된 테스트', () => {
   ];
   it.each(userCases)(
     'data의 fields는 null이 없어야한다.',
-    (username, password, nickname, expected) => {
+    (email, password, nickname, expected) => {
       wp.setData({
         data: {
-          username: username,
+          email: email,
           password: password,
           nickName: nickname,
         },
@@ -74,15 +75,15 @@ describe('User Register 와 관련된 테스트', () => {
     }
   );
 
-  it.skip('data를 담고 버튼을 클릭하면 data가 전송된다', async () => {
-    wp.find('.username').setValue(username);
+  it('data를 담고 버튼을 클릭하면 data가 전송된다', async () => {
+    wp.find('.email').setValue(email);
     wp.find('.password').setValue(password);
     wp.find('.nickName').setValue(nickName);
 
     wp.find('.userRegister').trigger('click');
 
     let data = {
-      username: username,
+      email: email,
       password: password,
       nickName: nickName,
     };
