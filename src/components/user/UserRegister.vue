@@ -10,7 +10,7 @@
       <span>password_again : </span>
       <input class="password_re" type="text" v-model="password_re" />
     </div>
-    <div class="error__password--input">
+    <div class="error__password--input" v-if="isPasswordSame">
       <h3>패스워드가 맞지 않습니다.</h3>
     </div>
     <div>
@@ -35,6 +35,11 @@ export default {
       },
       password_re: '',
     };
+  },
+  computed: {
+    isPasswordSame() {
+      return this.data.password == this.password_re;
+    },
   },
   methods: {
     ...mapActions({ registerUser: `${USER_NAMESPACE}/${REGISTER_USER}` }),

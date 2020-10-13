@@ -79,13 +79,22 @@ describe('User Register 와 관련된 테스트', () => {
     let wrongPwd = '12345';
     wp.find('.password').setValue(password);
     wp.find('.password_re').setValue(wrongPwd);
-
-    wp.find('.userRegister').trigger('click');
     wp.vm.$nextTick();
 
+    expect(wp.find('.error__password--input').exists()).toBe(true);
     let res = wp.find('.error__password--input').text();
-
     expect(res).toBe('패스워드가 맞지 않습니다.');
+  });
+
+  it('비밀번호 체크는 실시간으로 되야한다', () => {
+    let wrongPwd = '12345';
+    wp.find('.password').setValue(password);
+    wp.find('.password_re').setValue(wrongPwd);
+    expect(wp.vm.isPasswordSame).toBe(false);
+
+    wp.find('.password').setValue(password);
+    wp.find('.password_re').setValue(password);
+    expect(wp.vm.isPasswordSame).toBe(true);
   });
 
   it('data를 담고 버튼을 클릭하면 data가 전송된다', async () => {
