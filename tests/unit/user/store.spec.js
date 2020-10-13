@@ -20,7 +20,7 @@ describe('User와 관련된 모든 store', () => {
     let data = {
       username: 'test',
       password: 'pwd',
-      nickName: 'nick',
+      nickname: 'nick',
     };
 
     await store.actions.REGISTER_USER({ commit }, data);

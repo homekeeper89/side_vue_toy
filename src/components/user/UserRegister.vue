@@ -10,8 +10,11 @@
       <span>password_again : </span>
       <input class="password_re" type="text" v-model="password_re" />
     </div>
+    <div class="error__password--input">
+      <h3>패스워드가 맞지 않습니다.</h3>
+    </div>
     <div>
-      <input class="nickName" type="text" v-model="data.nickName" />
+      <input class="nickname" type="text" v-model="data.nickname" />
     </div>
     <div>
       <button class="userRegister" @click="register">등록</button>
@@ -28,7 +31,7 @@ export default {
       data: {
         email: '',
         password: '',
-        nickName: '',
+        nickname: '',
       },
       password_re: '',
     };
