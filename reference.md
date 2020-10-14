@@ -43,3 +43,4 @@ https://stackoverflow.com/questions/51261781/write-test-axios-mock-adapter-with-
 https://dev.to/zaklaughton/the-only-3-steps-you-need-to-mock-an-api-call-in-jest-39mb
 https://nyanshen.github.io/2019/08/14/jest%20mock%20axios%20complex%20implement/
 https://www.daleseo.com/jest-fn-spy-on/
+https://www.programmersought.com/article/298752901/
