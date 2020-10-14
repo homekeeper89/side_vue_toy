@@ -10,15 +10,20 @@ describe('User와 관련된 모든 store', () => {
   };
   let spyPost;
   beforeEach(() => {
+    spyPost = jest.spyOn(mockAxios, 'post');
+  });
+
+  afterEach(() => {
+    // jest.called가 리셋이 안되서 수정
+    jest.clearAllMocks();
+  });
+  it('등록 api는 성공할 경우와 실패할 경우를 구분 지어야 한다', async () => {
     mockAxios.post.mockImplementationOnce(() =>
       Promise.resolve({ data: status })
     );
-    spyPost = jest.spyOn(mockAxios, 'post');
-  });
-  it('등록 api는 성공할 경우와 실패할 경우를 구분 지어야 한다', async () => {
     let commit = jest.fn();
     let data = {
-      username: 'test',
+      email: 'test',
       password: 'pwd',
       nickname: 'nick',
     };
@@ -52,5 +57,30 @@ describe('User와 관련된 모든 store', () => {
     await expect(store.actions.REGISTER_USER(jest.fn(), {})).rejects.toThrow(
       'API Error occurred'
     );
+  });
+
+  it('이메일 중복 검사 실패시 error 상태에 저장 해야함', async () => {
+    jest.clearAllMocks();
+    let failStatus = {
+      status_code: 205,
+      msg: 'duplicated email id',
+    };
+    mockAxios.post.mockImplementationOnce(() =>
+      Promise.resolve({ data: failStatus })
+    );
+    let commit = jest.fn();
+    let data = {
+      email: 'test@email.com',
+    };
+
+    await expect(store.actions.CHECK_EMAIL({ commit }, data)).rejects.toThrow(
+      'API Error occurred'
+    );
+    let url = getUrlFromSpy(spyPost);
+    let body = getDataFromSpy(spyPost);
+
+    expect(spyPost).toBeCalledTimes(1);
+    expect(url).toEqual('/api/users/v1/email/duplicate');
+    expect(body).toEqual({ data: data });
   });
 });

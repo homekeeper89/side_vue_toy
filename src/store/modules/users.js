@@ -1,8 +1,13 @@
 import axios from 'axios';
-import { REGISTER_USER, SET_USER_API_STATUS } from './users-type.js';
+import {
+  REGISTER_USER,
+  SET_USER_API_STATUS,
+  CHECK_EMAIL,
+} from './users-type.js';
 import { inspectResponse } from '@/utils/api-helper';
 
 const api_register_user = '/api/users/v1';
+const api_check_email = '/api/users/v1/email/duplicate';
 
 const reqresApi = axios.create({
   baseURL: 'https://reqres.in', // Url
@@ -28,6 +33,18 @@ export const users = {
         commit(SET_USER_API_STATUS, res.data);
       } catch (err) {
         console.error(err);
+        throw Error('API Error occurred');
+      }
+    },
+    [CHECK_EMAIL]: async ({ commit }, data) => {
+      try {
+        let res = await reqresApi.post(api_check_email, {
+          data,
+        });
+        inspectResponse(res.data);
+        console.log(res.data);
+        commit(SET_USER_API_STATUS, res.data);
+      } catch (err) {
         throw Error('API Error occurred');
       }
     },
