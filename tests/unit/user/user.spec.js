@@ -75,11 +75,14 @@ describe('User Register 와 관련된 테스트', () => {
     }
   );
 
-  it('비밀번호가 서로 다르면 메세지를 띄워줘야한다', () => {
+  it('비밀번호가 서로 다르면 메세지를 띄워줘야한다', async () => {
+    // NOTE v-if가 제대로 테스트가 안됬음. 해결책 https://github.com/vuejs/vue-test-utils/issues/1384
+    expect(wp.find('.error__password--input').exists()).toBe(false);
+
     let wrongPwd = '12345';
     wp.find('.password').setValue(password);
     wp.find('.password_re').setValue(wrongPwd);
-    wp.vm.$nextTick();
+    await wp.vm.$nextTick();
 
     expect(wp.find('.error__password--input').exists()).toBe(true);
     let res = wp.find('.error__password--input').text();
