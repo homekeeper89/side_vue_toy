@@ -4,6 +4,9 @@
       <span>email : </span>
       <input class="email" type="text" v-model="data.email" />
     </div>
+    <div v-if="isEmailDuplicated" class="error__email--duplicated">
+      <h3>이메일이 사용 중 입니다. 다른 이메일을 입력하여 주세요</h3>
+    </div>
     <div>
       <span>password : </span>
       <input class="password" type="text" v-model="data.password" />
@@ -37,6 +40,9 @@ export default {
     };
   },
   computed: {
+    isEmailDuplicated() {
+      return false;
+    },
     isPasswordSame() {
       return this.data.password == this.password_re;
     },

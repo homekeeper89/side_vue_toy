@@ -100,6 +100,11 @@ describe('User Register 와 관련된 테스트', () => {
     expect(wp.vm.isPasswordSame).toBe(true);
   });
 
+  it('이메일 중복 검사 성공 / 실패 안내 문구 ', () => {
+    wp.vm.isEmailDuplicated = true;
+    expect(wp.find('.error__email--duplicated').exists()).toBe(true);
+  });
+
   it('data를 담고 버튼을 클릭하면 data가 전송된다', async () => {
     wp.find('.email').setValue(email);
     wp.find('.password').setValue(password);
