@@ -4,7 +4,7 @@ import mockAxios from 'axios';
 import { getUrlFromSpy, getDataFromSpy } from '../../test-helper.js';
 
 describe('User와 관련된 모든 store', () => {
-  const status = {
+  let status = {
     status_code: 200,
     msg: 'success',
   };
@@ -48,6 +48,10 @@ describe('User와 관련된 모든 store', () => {
   });
 
   it('apiStatus 변경 테스트', () => {
+    let status = {
+      status_code: 404,
+      msg: 'success',
+    };
     let state = store.state;
     store.mutations.SET_USER_API_STATUS(state, status);
     expect(state.apiStatus.code).toEqual(status.status_code);
@@ -82,5 +86,15 @@ describe('User와 관련된 모든 store', () => {
     expect(spyPost).toBeCalledTimes(1);
     expect(url).toEqual('/api/users/v1/email/duplicate');
     expect(body).toEqual({ data: data });
+  });
+
+  it('api 상태가져온다', () => {
+    let state = {
+      apiStatus: {
+        code: 200,
+        msg: '',
+      },
+    };
+    expect(store.getters.apiStatus(state).code).toEqual(200);
   });
 });

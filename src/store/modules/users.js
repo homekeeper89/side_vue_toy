@@ -18,11 +18,15 @@ export const users = {
   namespaced: true,
   state: {
     apiStatus: {
-      code: 0,
+      code: 200,
       msg: '',
     },
   },
-  getters: {},
+  getters: {
+    apiStatus(state) {
+      return state.apiStatus;
+    },
+  },
   actions: {
     [REGISTER_USER]: async ({ commit }, data) => {
       try {
@@ -32,7 +36,6 @@ export const users = {
         inspectResponse(res.data);
         commit(SET_USER_API_STATUS, res.data);
       } catch (err) {
-        console.error(err);
         throw Error('API Error occurred');
       }
     },
@@ -42,7 +45,6 @@ export const users = {
           data,
         });
         inspectResponse(res.data);
-        console.log(res.data);
         commit(SET_USER_API_STATUS, res.data);
       } catch (err) {
         throw Error('API Error occurred');

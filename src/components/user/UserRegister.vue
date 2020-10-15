@@ -25,7 +25,7 @@
   </div>
 </template>
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import { USER_NAMESPACE, REGISTER_USER } from '@/store/modules/users-type';
 export default {
   name: 'UserRegister',
@@ -40,8 +40,10 @@ export default {
     };
   },
   computed: {
+    ...mapGetters({ apiStatus: `${USER_NAMESPACE}/apiStatus` }),
     isEmailDuplicated() {
-      return false;
+      console.log(this.apiStatus);
+      return this.apiStatus.code == 200 ? false : true;
     },
     isPasswordSame() {
       return this.data.password == this.password_re;
