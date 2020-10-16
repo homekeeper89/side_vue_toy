@@ -37,6 +37,10 @@ describe('User Register 와 관련된 테스트', () => {
     expect(wp.html()).toMatchSnapshot(); // UI가 나중에 변경될까바 참고 : https://jestjs.io/docs/en/snapshot-testing
   });
 
+  it('요소들은 제대로 페이지 렌더가 되어있는가', () => {
+    expect(wp.find('.button__email--check').exists()).toBe(true);
+  });
+
   it('Component가 제대로 렌더 되는가', () => {
     expect(wp.exists()).toBe(true);
   });

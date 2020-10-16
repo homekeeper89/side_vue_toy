@@ -4,6 +4,9 @@
       <span>email : </span>
       <input class="email" type="text" v-model="data.email" />
     </div>
+    <div>
+      <button class="button__email--check">이메일 중복 체크</button>
+    </div>
     <div v-if="isEmailDuplicated" class="error__email--duplicated">
       <h3>이메일이 사용 중 입니다. 다른 이메일을 입력하여 주세요</h3>
     </div>
@@ -42,7 +45,6 @@ export default {
   computed: {
     ...mapGetters({ apiStatus: `${USER_NAMESPACE}/apiStatus` }),
     isEmailDuplicated() {
-      console.log(this.apiStatus);
       return this.apiStatus.code == 200 ? false : true;
     },
     isPasswordSame() {
