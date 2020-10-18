@@ -41,6 +41,10 @@ describe('User Register 와 관련된 테스트', () => {
     expect(wp.find('.button__email--check').exists()).toBe(true);
   });
 
+  it('이메일 중복 체크 버튼 클릭은 성공해야한다', () => {
+    wp.find('.button__email--check').trigger('click');
+  });
+
   it('Component가 제대로 렌더 되는가', () => {
     expect(wp.exists()).toBe(true);
   });
