@@ -49,19 +49,26 @@ describe('User Register 와 관련된 테스트', () => {
   it('요소들은 제대로 페이지 렌더가 되어있는가', () => {
     expect(wp.find('.button__email--check').exists()).toBe(true);
   });
+  const emailCase = [
+    ['success@email.com', true],
+    ['fail-email', false],
+  ];
+  it.each(emailCase)(
+    '이메일 중복 체크 버튼 클릭은 성공해야한다',
+    async (email, expected) => {
+      let data = 'success@email.com';
+      const spyMethod = jest.spyOn(wp.vm, 'validateData');
+      wp.find('.email').setValue('success@email.com');
+      wp.find('.button__email--check').trigger('click');
+      await flushPromises();
 
-  it('이메일 중복 체크 버튼 클릭은 성공해야한다', async () => {
-    let data = 'success@email.com';
-    wp.find('.email').setValue('success@email.com');
-    wp.find('.button__email--check').trigger('click');
-    await flushPromises();
-
-    let url = getUrlFromSpy(spyPost);
-    let body = getDataFromSpy(spyPost);
-
-    expect(url).toBe(api_check_email);
-    expect(body).toEqual({ data: data });
-  });
+      let url = getUrlFromSpy(spyPost);
+      let body = getDataFromSpy(spyPost);
+      expect(spyMethod).toHaveBeenCalled();
+      expect(url).toBe(api_check_email);
+      expect(body).toEqual({ data: data });
+    }
+  );
 
   it('Component가 제대로 렌더 되는가', () => {
     expect(wp.exists()).toBe(true);

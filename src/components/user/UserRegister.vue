@@ -64,7 +64,9 @@ export default {
     }),
     checkEmail() {
       let payload = this.data.email;
-      this.checkUserEmail(payload);
+      if (this.validateData(payload)) {
+        this.checkUserEmail(payload);
+      }
     },
     register() {
       let payload = this.data;
