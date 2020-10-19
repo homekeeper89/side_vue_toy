@@ -5,7 +5,9 @@
       <input class="email" type="text" v-model="data.email" />
     </div>
     <div>
-      <button class="button__email--check">이메일 중복 체크</button>
+      <button class="button__email--check" @click="checkEmail">
+        이메일 중복 체크
+      </button>
     </div>
     <div v-if="isEmailDuplicated" class="error__email--duplicated">
       <h3>이메일이 사용 중 입니다. 다른 이메일을 입력하여 주세요</h3>
@@ -29,7 +31,11 @@
 </template>
 <script>
 import { mapActions, mapGetters } from 'vuex';
-import { USER_NAMESPACE, REGISTER_USER } from '@/store/modules/users-type';
+import {
+  USER_NAMESPACE,
+  REGISTER_USER,
+  CHECK_EMAIL,
+} from '@/store/modules/users-type';
 export default {
   name: 'UserRegister',
   data() {
@@ -52,13 +58,22 @@ export default {
     },
   },
   methods: {
-    ...mapActions({ registerUser: `${USER_NAMESPACE}/${REGISTER_USER}` }),
+    ...mapActions({
+      registerUser: `${USER_NAMESPACE}/${REGISTER_USER}`,
+      checkUserEmail: `${USER_NAMESPACE}/${CHECK_EMAIL}`,
+    }),
+    checkEmail() {
+      let payload = this.data.email;
+      this.checkUserEmail(payload);
+    },
     register() {
       let payload = this.data;
-      this.registerUser(payload);
+      if (this.validateData(payload)) {
+        this.registerUser(payload);
+      }
     },
-    validateData() {
-      let res = Object.keys(this.data).filter((item) => !this.data[item]);
+    validateData(data) {
+      let res = Object.keys(data).filter((item) => !data[item]);
       return res.length != 0 ? false : true;
     },
   },

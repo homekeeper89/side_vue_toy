@@ -6,8 +6,8 @@ import {
 } from './users-type.js';
 import { inspectResponse } from '@/utils/api-helper';
 
-const api_register_user = '/api/users/v1';
-const api_check_email = '/api/users/v1/email/duplicate';
+export const api_register_user = '/api/users/v1';
+export const api_check_email = '/api/users/v1/email/duplicate';
 
 const reqresApi = axios.create({
   baseURL: 'https://reqres.in', // Url

@@ -3,7 +3,9 @@
 exports[`User Register 와 관련된 테스트 html should render correctly 1`] = `
 <div class="UserRegister">
   <div><span>email : </span> <input type="text" class="email"></div>
-  <div><button class="button__email--check">이메일 중복 체크</button></div>
+  <div><button class="button__email--check">
+      이메일 중복 체크
+    </button></div>
   <!---->
   <div><span>password : </span> <input type="text" class="password"> <span>password_again : </span> <input type="text" class="password_re"></div>
   <!---->

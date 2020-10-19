@@ -2,7 +2,11 @@ import Vuex from 'vuex';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import UserRegister from '@/components/user/UserRegister.vue';
 import flushPromises from 'flush-promises';
-import { users } from '@/store/modules/users';
+import {
+  users,
+  api_check_email,
+  api_register_user,
+} from '@/store/modules/users';
 import mockAxios from 'axios';
 import { getUrlFromSpy, getDataFromSpy } from '../../test-helper.js';
 
@@ -33,6 +37,11 @@ describe('User Register 와 관련된 테스트', () => {
     wp = shallowMount(UserRegister, { store, localVue });
   });
 
+  afterEach(() => {
+    // jest.called가 리셋이 안되서 수정
+    jest.clearAllMocks();
+  });
+
   it('html should render correctly', () => {
     expect(wp.html()).toMatchSnapshot(); // UI가 나중에 변경될까바 참고 : https://jestjs.io/docs/en/snapshot-testing
   });
@@ -41,8 +50,17 @@ describe('User Register 와 관련된 테스트', () => {
     expect(wp.find('.button__email--check').exists()).toBe(true);
   });
 
-  it('이메일 중복 체크 버튼 클릭은 성공해야한다', () => {
+  it('이메일 중복 체크 버튼 클릭은 성공해야한다', async () => {
+    let data = 'success@email.com';
+    wp.find('.email').setValue('success@email.com');
     wp.find('.button__email--check').trigger('click');
+    await flushPromises();
+
+    let url = getUrlFromSpy(spyPost);
+    let body = getDataFromSpy(spyPost);
+
+    expect(url).toBe(api_check_email);
+    expect(body).toEqual({ data: data });
   });
 
   it('Component가 제대로 렌더 되는가', () => {
@@ -71,14 +89,12 @@ describe('User Register 와 관련된 테스트', () => {
   it.each(userCases)(
     'data의 fields는 null이 없어야한다.',
     (email, password, nickname, expected) => {
-      wp.setData({
-        data: {
-          email: email,
-          password: password,
-          nickname: nickname,
-        },
-      });
-      let res = wp.vm.validateData();
+      let data = {
+        email: email,
+        password: password,
+        nickname: nickname,
+      };
+      let res = wp.vm.validateData(data);
       expect(res).toEqual(expected);
     }
   );
@@ -144,7 +160,7 @@ describe('User Register 와 관련된 테스트', () => {
     let url = getUrlFromSpy(spyPost);
     let body = getDataFromSpy(spyPost);
 
-    expect(url).toBe('/api/users/v1');
+    expect(url).toBe(api_register_user);
     expect(body).toEqual({ data: data });
   });
 });
