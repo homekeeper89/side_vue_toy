@@ -49,6 +49,14 @@ describe('User Register 와 관련된 테스트', () => {
   it('요소들은 제대로 페이지 렌더가 되어있는가', () => {
     expect(wp.find('.button__email--check').exists()).toBe(true);
   });
+
+  it('이메일 체크 함수는 이메일을 구분 해야한다', () => {
+    let email = 'some@email.com';
+
+    let res = wp.vm.checkFormatEmail(email);
+    expect(res).toBe(true);
+  });
+
   const emailCase = [
     ['success@email.com', true],
     ['fail-email', false],
@@ -56,9 +64,8 @@ describe('User Register 와 관련된 테스트', () => {
   it.each(emailCase)(
     '이메일 중복 체크 버튼 클릭은 성공해야한다',
     async (email, expected) => {
-      let data = 'success@email.com';
       const spyMethod = jest.spyOn(wp.vm, 'validateData');
-      wp.find('.email').setValue('success@email.com');
+      wp.find('.email').setValue(email);
       wp.find('.button__email--check').trigger('click');
       await flushPromises();
 
@@ -66,7 +73,7 @@ describe('User Register 와 관련된 테스트', () => {
       let body = getDataFromSpy(spyPost);
       expect(spyMethod).toHaveBeenCalled();
       expect(url).toBe(api_check_email);
-      expect(body).toEqual({ data: data });
+      expect(body).toEqual({ data: email });
     }
   );
 
