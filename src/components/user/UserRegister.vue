@@ -62,6 +62,10 @@ export default {
       registerUser: `${USER_NAMESPACE}/${REGISTER_USER}`,
       checkUserEmail: `${USER_NAMESPACE}/${CHECK_EMAIL}`,
     }),
+    validateEmail(email) {
+      const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(String(email).toLowerCase());
+    },
     checkEmail() {
       let payload = this.data.email;
       if (this.validateData(payload)) {

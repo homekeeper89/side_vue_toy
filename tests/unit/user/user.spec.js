@@ -53,17 +53,14 @@ describe('User Register 와 관련된 테스트', () => {
   it('이메일 체크 함수는 이메일을 구분 해야한다', () => {
     let email = 'some@email.com';
 
-    let res = wp.vm.checkFormatEmail(email);
+    let res = wp.vm.validateEmail(email);
     expect(res).toBe(true);
   });
 
-  const emailCase = [
-    ['success@email.com', true],
-    ['fail-email', false],
-  ];
+  const emailCase = [['success@email.com'], ['fail-email']];
   it.each(emailCase)(
     '이메일 중복 체크 버튼 클릭은 성공해야한다',
-    async (email, expected) => {
+    async (email) => {
       const spyMethod = jest.spyOn(wp.vm, 'validateData');
       wp.find('.email').setValue(email);
       wp.find('.button__email--check').trigger('click');
