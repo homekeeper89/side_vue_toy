@@ -50,14 +50,18 @@ describe('User Register 와 관련된 테스트', () => {
     expect(wp.find('.button__email--check').exists()).toBe(true);
   });
 
-  it('이메일 체크 함수는 이메일을 구분 해야한다', () => {
-    let email = 'some@email.com';
+  const emailCase = [
+    ['success@email.com', true],
+    ['fail-email', false],
+  ];
+  it.each(emailCase)(
+    '이메일 체크 함수는 이메일을 구분 해야한다',
+    (email, expected) => {
+      let res = wp.vm.validateEmail(email);
+      expect(res).toBe(expected);
+    }
+  );
 
-    let res = wp.vm.validateEmail(email);
-    expect(res).toBe(true);
-  });
-
-  const emailCase = [['success@email.com'], ['fail-email']];
   it.each(emailCase)(
     '이메일 중복 체크 버튼 클릭은 성공해야한다',
     async (email) => {
