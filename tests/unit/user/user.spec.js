@@ -53,6 +53,8 @@ describe('User Register 와 관련된 테스트', () => {
   const emailCase = [
     ['success@email.com', true],
     ['fail-email', false],
+    ['asdf123213123', false],
+    ['ass____@mail.com', true],
   ];
   it.each(emailCase)(
     '이메일 체크 함수는 이메일을 구분 해야한다',
