@@ -18,7 +18,7 @@ describe('User Register 와 관련된 테스트', () => {
     status_code: 200,
     msg: 'success',
   };
-  const email = 'test@username';
+  const EMAIL = 'test@username';
   const password = 'testPassword';
   const nickname = 'testnickname';
   let wp;
@@ -85,7 +85,7 @@ describe('User Register 와 관련된 테스트', () => {
   });
 
   it('이메일, 비밀번호, 닉네임이 제대로 담기는가', () => {
-    wp.find('.email').setValue(email);
+    wp.find('.email').setValue(EMAIL);
     wp.find('.password').setValue(password);
     wp.find('.nickname').setValue(nickname);
 
@@ -93,7 +93,7 @@ describe('User Register 와 관련된 테스트', () => {
 
     wp.vm.$nextTick();
 
-    expect(wp.vm.data.email).toBe(email);
+    expect(wp.vm.data.email).toBe(EMAIL);
     expect(wp.vm.data.password).toBe(password);
     expect(wp.vm.data.nickname).toBe(nickname);
   });
@@ -161,14 +161,14 @@ describe('User Register 와 관련된 테스트', () => {
   });
 
   it('data를 담고 버튼을 클릭하면 data가 전송된다', async () => {
-    wp.find('.email').setValue(email);
+    wp.find('.email').setValue(EMAIL);
     wp.find('.password').setValue(password);
     wp.find('.nickname').setValue(nickname);
 
     wp.find('.userRegister').trigger('click');
 
     let data = {
-      email: email,
+      email: EMAIL,
       password: password,
       nickname: nickname,
     };
