@@ -19,8 +19,8 @@ describe('User Register 와 관련된 테스트', () => {
     msg: 'success',
   };
   const EMAIL = 'test@username';
-  const password = 'testPassword';
-  const nickname = 'testnickname';
+  const PASSWORD = 'testPassword';
+  const NICNNAME = 'testnickname';
   let wp;
   let store;
   let spyPost;
@@ -86,16 +86,16 @@ describe('User Register 와 관련된 테스트', () => {
 
   it('이메일, 비밀번호, 닉네임이 제대로 담기는가', () => {
     wp.find('.email').setValue(EMAIL);
-    wp.find('.password').setValue(password);
-    wp.find('.nickname').setValue(nickname);
+    wp.find('.password').setValue(PASSWORD);
+    wp.find('.nickname').setValue(NICNNAME);
 
     wp.find('.userRegister').trigger('click');
 
     wp.vm.$nextTick();
 
     expect(wp.vm.data.email).toBe(EMAIL);
-    expect(wp.vm.data.password).toBe(password);
-    expect(wp.vm.data.nickname).toBe(nickname);
+    expect(wp.vm.data.password).toBe(PASSWORD);
+    expect(wp.vm.data.nickname).toBe(NICNNAME);
   });
 
   const userCases = [
@@ -121,7 +121,7 @@ describe('User Register 와 관련된 테스트', () => {
     expect(wp.find('.error__password--input').exists()).toBe(false);
 
     let wrongPwd = '12345';
-    wp.find('.password').setValue(password);
+    wp.find('.password').setValue(PASSWORD);
     wp.find('.password_re').setValue(wrongPwd);
     await wp.vm.$nextTick();
 
@@ -132,12 +132,12 @@ describe('User Register 와 관련된 테스트', () => {
 
   it('비밀번호 체크는 실시간으로 되야한다', () => {
     let wrongPwd = '12345';
-    wp.find('.password').setValue(password);
+    wp.find('.password').setValue(PASSWORD);
     wp.find('.password_re').setValue(wrongPwd);
     expect(wp.vm.isPasswordSame).toBe(false);
 
-    wp.find('.password').setValue(password);
-    wp.find('.password_re').setValue(password);
+    wp.find('.password').setValue(PASSWORD);
+    wp.find('.password_re').setValue(PASSWORD);
     expect(wp.vm.isPasswordSame).toBe(true);
   });
 
@@ -162,15 +162,15 @@ describe('User Register 와 관련된 테스트', () => {
 
   it('data를 담고 버튼을 클릭하면 data가 전송된다', async () => {
     wp.find('.email').setValue(EMAIL);
-    wp.find('.password').setValue(password);
-    wp.find('.nickname').setValue(nickname);
+    wp.find('.password').setValue(PASSWORD);
+    wp.find('.nickname').setValue(NICNNAME);
 
     wp.find('.userRegister').trigger('click');
 
     let data = {
       email: EMAIL,
-      password: password,
-      nickname: nickname,
+      password: PASSWORD,
+      nickname: NICNNAME,
     };
     await flushPromises();
 
