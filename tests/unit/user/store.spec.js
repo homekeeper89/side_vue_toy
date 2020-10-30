@@ -1,6 +1,7 @@
-import { users as store } from '@/store/modules/users';
-import { SET_USER_API_STATUS } from '@/store/modules/users-type';
 import mockAxios from 'axios';
+import { users as store } from '@/store/modules/users';
+import { api_register_user, api_check_email } from '@/store/modules/users';
+import { SET_USER_API_STATUS } from '@/store/modules/users-type';
 import { getUrlFromSpy, getDataFromSpy } from '../../test-helper.js';
 
 describe('User와 관련된 모든 store', () => {
@@ -34,7 +35,7 @@ describe('User와 관련된 모든 store', () => {
     let body = getDataFromSpy(spyPost);
 
     expect(spyPost).toBeCalledTimes(1);
-    expect(url).toEqual('/api/users/v1');
+    expect(url).toEqual(api_register_user);
     expect(body).toEqual({ data: data });
     expect(commit).toHaveBeenCalledWith(SET_USER_API_STATUS, status);
   });
@@ -44,7 +45,7 @@ describe('User와 관련된 모든 store', () => {
       'API Error occurred'
     );
     let url = getUrlFromSpy(spyPost);
-    expect(url).toBe('/api/users/v1');
+    expect(url).toBe(api_register_user);
   });
 
   it('apiStatus 변경 테스트', () => {
@@ -84,7 +85,7 @@ describe('User와 관련된 모든 store', () => {
     let body = getDataFromSpy(spyPost);
 
     expect(spyPost).toBeCalledTimes(1);
-    expect(url).toEqual('/api/users/v1/email/duplicate');
+    expect(url).toEqual(api_check_email);
     expect(body).toEqual({ data: data });
   });
 
