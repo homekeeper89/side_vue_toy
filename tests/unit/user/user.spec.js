@@ -141,24 +141,33 @@ describe('User Register 와 관련된 테스트', () => {
     expect(wp.vm.isPasswordSame).toBe(true);
   });
 
-  it('이메일 중복 검사 성공 / 실패 안내 문구 ', async () => {
-    let getters = {
-      apiStatus: () => {
-        return {
-          code: 200,
-          msg: '',
-        };
-      },
-    };
-    users.getters = getters;
-    store = new Vuex.Store({
-      modules: {
-        users,
-      },
-    });
-    wp = shallowMount(UserRegister, { store, localVue });
-    await expect(wp.find('.error__email--duplicated').exists()).toBe(false);
-  });
+  const emailDuplciateState = [
+    [200, false],
+    [202, true],
+  ];
+  it.each(emailDuplciateState)(
+    '이메일 중복 검사 성공 / 실패 안내 문구 ',
+    async (code, expected) => {
+      let getters = {
+        apiStatus: () => {
+          return {
+            code: code,
+            msg: '',
+          };
+        },
+      };
+      users.getters = getters;
+      store = new Vuex.Store({
+        modules: {
+          users,
+        },
+      });
+      wp = shallowMount(UserRegister, { store, localVue });
+      await expect(wp.find('.error__email--duplicated').exists()).toBe(
+        expected
+      );
+    }
+  );
 
   it('data를 담고 버튼을 클릭하면 data가 전송된다', async () => {
     wp.find('.email').setValue(EMAIL);
