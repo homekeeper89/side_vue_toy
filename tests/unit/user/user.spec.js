@@ -20,7 +20,7 @@ describe('User Register 와 관련된 테스트', () => {
   };
   const EMAIL = 'test@username';
   const PASSWORD = 'testPassword';
-  const NICNNAME = 'testnickname';
+  const NICKNAME = 'testnickname';
   let wp;
   let store;
   let spyPost;
@@ -87,7 +87,7 @@ describe('User Register 와 관련된 테스트', () => {
   it('이메일, 비밀번호, 닉네임이 제대로 담기는가', () => {
     wp.find('.email').setValue(EMAIL);
     wp.find('.password').setValue(PASSWORD);
-    wp.find('.nickname').setValue(NICNNAME);
+    wp.find('.nickname').setValue(NICKNAME);
 
     wp.find('.userRegister').trigger('click');
 
@@ -95,7 +95,7 @@ describe('User Register 와 관련된 테스트', () => {
 
     expect(wp.vm.data.email).toBe(EMAIL);
     expect(wp.vm.data.password).toBe(PASSWORD);
-    expect(wp.vm.data.nickname).toBe(NICNNAME);
+    expect(wp.vm.data.nickname).toBe(NICKNAME);
   });
 
   const userCases = [
@@ -172,14 +172,14 @@ describe('User Register 와 관련된 테스트', () => {
   it('data를 담고 버튼을 클릭하면 data가 전송된다', async () => {
     wp.find('.email').setValue(EMAIL);
     wp.find('.password').setValue(PASSWORD);
-    wp.find('.nickname').setValue(NICNNAME);
+    wp.find('.nickname').setValue(NICKNAME);
 
     wp.find('.userRegister').trigger('click');
 
     let data = {
       email: EMAIL,
       password: PASSWORD,
-      nickname: NICNNAME,
+      nickname: NICKNAME,
     };
     await flushPromises();
 
