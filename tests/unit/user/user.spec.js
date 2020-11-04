@@ -42,7 +42,7 @@ describe('User Register 와 관련된 테스트', () => {
     jest.clearAllMocks();
   });
 
-  it('html should render correctly', () => {
+  it('해당 페이지는 정상으로 렌더가 되어야한다', () => {
     expect(wp.html()).toMatchSnapshot(); // UI가 나중에 변경될까바 참고 : https://jestjs.io/docs/en/snapshot-testing
   });
 
