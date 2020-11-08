@@ -1,10 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`User Register 와 관련된 테스트 html should render correctly 1`] = `
+exports[`User Register 와 관련된 테스트 해당 페이지는 정상으로 렌더가 되어야한다 1`] = `
 <div class="UserRegister">
-  <div><span>UserName</span> <input type="text" class="username"></div>
-  <div><span>password</span> <input type="text" class="password"></div>
-  <div><input type="text" class="nickName"></div>
+  <div><span>email : </span> <input type="text" class="email"></div>
+  <div><button class="button__email--check">
+      이메일 중복 체크
+    </button></div>
+  <!---->
+  <div><span>password : </span> <input type="text" class="password"> <span>password_again : </span> <input type="text" class="password_re"></div>
+  <!---->
+  <div><input type="text" class="nickname"></div>
   <div><button class="userRegister">등록</button></div>
 </div>
 `;
